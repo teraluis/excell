@@ -19,18 +19,21 @@ function supp_sautlignecsv($chemin){
                         echo "<b>".$data[$c]."</b><br>";
                         $ligne=trim($data[$c]);
                         $dernier_caractere=substr($ligne,-1);
+                        $avant_dernier=substr($ligne,-2,1);
                         echo "dernier caractere : ".$dernier_caractere."</br>";
-                        $condition = ($dernier_caractere=="," || $dernier_caractere=="\"" || preg_match($regex, $dernier_caractere) || $dernier_caractere=="'");
+                        echo "avant dernier caractere : ".$avant_dernier."</br>";
+                        $condition = 
+                        ( ( ($dernier_caractere=="\"" || $dernier_caractere=="'" || $dernier_caractere=",") &&  ($avant_dernier=="," || preg_match($regex, $avant_dernier) )) );
                         if($condition && $temp==""){
                             array_push($newtab,$ligne);
                         }else if(!$condition && $temp==""){
-                            $temp.=$ligne." ";
+                            $temp=$ligne." ";
                         }else if($condition && $temp!=""){
                             $temp.=$ligne;
                             array_push($newtab,$temp);
                             $temp="";
                         }else if(!$condition && $temp!=""){
-                            $temp.=$ligne." ";
+                            $temp.=" ".$ligne." ";
                         }
 
 
@@ -58,7 +61,8 @@ function supp_sautlignecsv($chemin){
             foreach($newtab as $fields){
                 $fields=str_replace("é","e",$fields);
                 $fields=str_replace("è","e",$fields);
-                
+                $fields=str_replace("ê","e",$fields);
+                $fields=str_replace("à","a",$fields);
                 $fields = array($fields);
                 fputcsv($fp, $fields);
             }

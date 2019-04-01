@@ -1,0 +1,7 @@
+SAV :
+Execution : https://revendeurs.angeleyes-eyewear.com/wp-cron.php?export_key=XpJtOAVjN2Cf&export_id=132&action=trigger
+Récupération : https://revendeurs.angeleyes-eyewear.com/wp-cron.php?export_hash=4316a19447a025c6&export_id=132&action=get_data
+
+Commande : 
+Execution : https://revendeurs.angeleyes-eyewear.com/wp-cron.php?export_key=XpJtOAVjN2Cf&export_id=9&action=trigger
+Récupération : https://revendeurs.angeleyes-eyewear.com/wp-cron.php?export_hash=da5c67cbc6569193&export_id=9&action=get_data

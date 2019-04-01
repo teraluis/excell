@@ -23,7 +23,7 @@ function supp_sautlignecsv($chemin){
                         echo "dernier caractere : ".$dernier_caractere."</br>";
                         echo "avant dernier caractere : ".$avant_dernier."</br>";
                         $condition = 
-                        ( ( ($dernier_caractere=="\"" || $dernier_caractere=="'" || $dernier_caractere=",") &&  ($avant_dernier=="," || preg_match($regex, $avant_dernier) )) );
+                        ( ( ($dernier_caractere=="\"" || $dernier_caractere=="'" || $dernier_caractere=="," || preg_match($regex, $avant_dernier)) &&  ($avant_dernier=="," || preg_match($regex, $avant_dernier) )) );
                         if($condition && $temp==""){
                             array_push($newtab,$ligne);
                         }else if(!$condition && $temp==""){

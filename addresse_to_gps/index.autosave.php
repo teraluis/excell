@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+
 <?php
-$fichier = 'ocrd_espange.csv';
+$fichier = 'clientsetrangers.csv';
 
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
@@ -11,7 +20,7 @@ function adressToCordenate($dlocation){
       $address = $dlocation; 
       
       $prepAddr = str_replace(' ','+',$address);
-
+      $prepAddr = str_replace(array(",","[","]","(",")"),'',$prepAddr);
       $geocode=file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$prepAddr.'+View,+CA&key=AIzaSyCw7IF5dgrLYfevSM2pHzENz0ungw0dt88');
 
       $output= json_decode($geocode);
@@ -21,35 +30,29 @@ function adressToCordenate($dlocation){
       return array($latitude,$longitude);
 }
 $j=0;
-/*$tab_affichage="<table border='1'>";*/
+
 foreach($csv as $ligne){
-	if($j>=800 && $j<927){
-/*		$tab_affichage.= "<tr>";
-		$tab_affichage.= "<td>".$j."</td>";
-		$tab_affichage.= "<td>".$ligne[0]."</td>";
-		$tab_affichage.= "<td>".$ligne[1]."</td>";
-		$tab_affichage.= "<td>".$ligne[2]."</td>";
-		$tab_affichage.= "<td>".$ligne[3]."</td>";
-		$tab_affichage.= "<td>".$ligne[4]."</td>";
-		$tab_affichage.= "<td>".$ligne[5]."</td>";
-		$tab_affichage.= "<td>".$ligne[6]."</td>";
-		$tab_affichage.= "<td>".$ligne[7]."</td>";
-		$tab_affichage.= "</tr>";*/
+
+	if($j>=2 && $j<40	){
+	
 		if(true){
-			//$leString=trim($ligne[5])." ".trim($ligne[3]);
-			$leString=trim($ligne[3])." ".trim($ligne[5]);
-			$leString=trim($ligne[3])." ".trim($ligne[5])." ".trim($ligne[6])." ".trim($ligne[7]);
+			$cardcode = $ligne[0];
+			$nom=$ligne[1];	
+			$rue = "";//$ligne[2];
+			$postal = $ligne[3];
+			$ville = $ligne[4];
+			$telephone= $ligne[5];
+			$pays = $ligne[8];
+			$leString=trim($rue)." ".trim($postal)." ".trim($ville)." ".trim($postal)." ".trim($pays);
 			$cordonates = adressToCordenate($leString);
-			$a=$ligne[1];
 			$la=$cordonates[0];
 			$lo=$cordonates[1];
-			$adresse_tab [] = array('telephone'=>$ligne[0],'addresse' => $a,'latitude' => $la,'longitude' => $lo);
+			$adresse_tab [] = array('telephone'=>$cardcode,'addresse' => $leString,'latitude' => $la,'longitude' => $lo);
 		}
 	}
 	$j++;
 }
-/*$tab_affichage.= "</table>";*/
-//echo $tab_affichage;
+
 function afficher_tableau($tab){
 	$i=0;
 	echo "<table border='1'>";
@@ -64,7 +67,7 @@ function afficher_tableau($tab){
 			echo "<tr>";
 					echo "<td>".$i."</td>";
 					echo "<td>";
-							echo $ligne['addresse'];
+							echo $ligne['telephone'];
 					echo "</td>";
 					echo "<td>";
 							echo $ligne['latitude'];
@@ -80,7 +83,7 @@ function afficher_tableau($tab){
 function create_fichier($nom_fichier,$tab){
 // Paramétrage de l'écriture du futur fichier CSV
 $chemin = $nom_fichier;
-$delimiteur = ','; // Pour une tabulation, utiliser $delimiteur = "t";
+$delimiteur = ';'; // Pour une tabulation, utiliser $delimiteur = "t";
 
 // Création du fichier csv (le fichier est vide pour le moment)
 // w+ : consulter http://php.net/manual/fr/function.fopen.php
@@ -102,6 +105,8 @@ foreach($tab as $ligne){
 fclose($fichier_csv);
 
 }
-//afficher_tableau($adresse_tab);
-create_fichier("kirk.csv",$adresse_tab);
+afficher_tableau($adresse_tab);
+create_fichier("etrangers_generes.csv",$adresse_tab);
 ?>
+</body>
+</html>

@@ -23,6 +23,10 @@ foreach ($montures as $key => $value) {
 				$matiere = 'combinée';
 				break;
 		}
+		$forme = $montures[$key]['forme'];
+		if($forme != ""){
+			$forme = ", forme ".$montures[$key]['forme'];
+		}
 		$coloris = $montures[$key]['coloris_standard'];
 		if($coloris==''){
 			$coloris="melange";
@@ -30,12 +34,11 @@ foreach ($montures as $key => $value) {
 			$coloris=$montures[$key]['coloris_standard'];
 		}
 		$title = $montures[$key]['nom_complet'];
-		$meta = "Lunette "." ".$montures[$key]['forme']." ".substr($montures[$key]['ID'],2)." coloris ".$coloris." taille ".$montures[$key]['taille']." matiere ".$matiere;
+		$meta = "Lunettes vintages au style colorie "." ".$forme." ".substr($montures[$key]['ID'],2)." coloris ".$coloris." taille ".$montures[$key]['taille']." matiere ".$matiere." famille ".$montures[$key]['famille'];
 		echo $title."<br>";
 		echo $meta."<br><br>";
 		$data [] = array(
-			"title"=>$title,
-			"meta" =>$meta
+			$title=>$meta
 		);
 }
 function create_fichier($nom_fichier,$tab){
@@ -59,9 +62,7 @@ foreach($tab as $key => $value){
 	$tab2 =$tab[$key];
 	foreach ($tab2 as $key => $value) {
 		$ligne = array($key,$value);
-		if($key=="title"){
-			fputcsv($fichier_csv, $lie , $delimiteur);
-		}
+		fputcsv($fichier_csv, $ligne , $delimiteur);
 
 	}
 	//fputcsv($fichier_csv, $ligne, $delimiteur);

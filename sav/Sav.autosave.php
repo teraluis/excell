@@ -18,6 +18,7 @@ class Sav
 		$tab="<table border='1' >";
 		$tab.="
 			<tr>\r\n
+			<td>0</td>
 			<td>1</td>
 			<td>2</td>
 			<td>3</td>
@@ -41,7 +42,7 @@ class Sav
 			<td>21</td>
 			<td>22</td>
 			<td>23</td>
-			<td>24</td>\r\n
+			\r\n
 		</tr>";//"tr>td*25>{$}"
 		foreach($this->csv as $ligne){
 			if($ligne[0]!=""){
@@ -78,20 +79,45 @@ class Sav
 	}
 	function uPiece(){
 		foreach($this->csv as $ligne){
-			if(($ligne[8]=='1' XOR ($ligne[9]=="1" && $ligne[10]=="2" ) )  ) {
-				$upiece[]='PB';
-			}else if($ligne[9]=="1"){
-				$upiece[]='BG';
-			}else if ($ligne[10]=="1") {
-				$upiece[]='BG';
-			}else if (condition) {
-				# code...
+			if($ligne[0]!="" && $ligne[0]!="id"){
+			
+				if(($ligne[7]!='' XOR ($ligne[8]!="" && $ligne[9]!="" ) )  ) {
+					$this->upiece[]='PB';
+				}else if($ligne[8]!=""){
+					$this->upiece[]='BG';
+				}else if ($ligne[10]!="") {
+					$this->upiece[]='BD';
+				}else if ($ligne[11]!="") {
+					$this->upiece[]='VO';
+				}else if ($ligne[11]!="") {
+					$this->upiece[]='VS';
+				}else if ($ligne[12]!="") {
+					$this->upiece[]='FACE';
+				}else if ($ligne[14]!='' OR $ligne[15]=="" OR $ligne[16]!="" OR $ligne[19]!="") {
+					$this->upiece[]='VISERIE';
+				}else if ($ligne[17] XOR ($ligne[21] && $ligne[22])) {
+					$this->upiece[]='MANCHON';
+				}else if ($ligne[18]!="") {
+					$this->upiece[]='PLAQUETTES';
+				}else if ($ligne[21]!="") {
+					$this->upiece[]='MANCHOND';
+				}else if ($ligne[22]!="" ) {
+					$this->upiece[]='TENON';
+				}else if ($ligne[23]!="") {
+					$this->upiece[]='TENON';
+				}else {
+					$this->upiece[]='MONTURE';
+				}
 			}
-
 		}
+	}
+	function getUpiece(){
+		return $this->upiece;
 	}
 }
 $filename ="sav.csv";
 $sav = new Sav($filename);
-echo $sav->afficher()
+$sav->uPiece();
+//echo $sav->afficher();
+var_dump($sav->getUpiece());
 ?>

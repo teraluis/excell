@@ -80,7 +80,6 @@ class Sav
 	function uPiece(){
 		foreach($this->csv as $ligne){
 			if($ligne[0]!="" && $ligne[0]!="id"){
-			
 				if(($ligne[7]!='' XOR ($ligne[8]!="" && $ligne[9]!="" ) )  ) {
 					$this->upiece[]='PB';
 				}else if($ligne[8]!=""){

@@ -1,0 +1,40 @@
+﻿ServiceCallID;origin;callType;description;CustomerCode;ItemCode;subject;U_Piece;ProblemType
+callID;origin;callType;description;CustomerCode;ItemCode;subject;U_Piece;ProblemType
+1;-1;1;"204497 Utilisateur : 2757 - Référence monture : vohookc3";C0490202471;vohookc3;"probleme au niveau des rivets FACE*1";FACE;3
+2;-1;1;"204498 Utilisateur : 2109 - Référence monture : fostreepc1";C0442084666;fostreepc1;"guirado FACE*1";FACE;3
+3;-1;1;"204504 Utilisateur : 3848 - Référence monture : foromeroc2";C0327263364;foromeroc2;FACE*1;FACE;3
+4;-1;1;"204508 Utilisateur : 1854 - Référence monture : fobuscemic2";C0385584532;fobuscemic2;FACE*1;FACE;3
+5;-1;1;"204509 Utilisateur : 1318 - Référence monture : fobatemanc1";C0321661158;fobatemanc1;FACE*1;FACE;3
+6;-1;1;"204512 Utilisateur : 4859 - Référence monture : foalbrightc6";C0473592085;foalbrightc6;FACE*1;FACE;3
+7;-1;1;"204513 Utilisateur : 1081 - Référence monture : vohookc2";C0298290679;vohookc2;BG*1;BG;3
+8;-1;1;"204514 Utilisateur : 1519 - Référence monture : vokeelyc2";C0327794668;vokeelyc2;BG*1;BG;3
+9;-1;1;"204515 Utilisateur : 3383 - Référence monture : logibusc3";C0562264179;logibusc3;;PB;3
+10;-1;1;"204521 Utilisateur : 2126 - Référence monture : loglazartc3";C0442397601;loglazartc3;"CHAPEY FACE*1";FACE;3
+11;-1;1;"204522 Utilisateur : 3550 - Référence monture : loartschoolc3";C0980362785;loartschoolc3;"casse soudure FACE*1";FACE;3
+12;-1;1;"204526 Utilisateur : 1458 - Référence monture : vogouldingc2";C0326261520;vogouldingc2;;PB;3
+13;-1;1;"204530 Utilisateur : 3753 - Référence monture : lsthelkac1";C0231502408;lsthelkac1;"RIBEIRO ELYSE FACE*1";FACE;3
+14;-1;1;"204539 Utilisateur : 4967 - Référence monture : loorangepeelc2";C0228236890;loorangepeelc2;"ref prudhomme BG*1";BG;3
+15;-1;1;"204540 Utilisateur : 3704 - Référence monture : foabernathyc1";C0432819180;foabernathyc1;PLAQUETTES*10;PLAQUETTES;3
+16;-1;1;"204541 Utilisateur : 1244 - Référence monture : lorockcityc1";C0320884948;lorockcityc1;FACE*1;FACE;3
+17;-1;1;"204546 Utilisateur : 1941 - Référence monture : fohathawayc3";C0387769480;fohathawayc3;"MENONCIN FACE*1";FACE;3
+18;-1;1;"204547 Utilisateur : 4166 - Référence monture : mobarbichettec3";C0556983012;mobarbichettec3;FACE*1;FACE;3
+19;-1;1;"204565 Utilisateur : 1455 - Référence monture : fobrennerc3";C0326076767;fobrennerc3;FACE*1;FACE;3
+20;-1;1;"204567 Utilisateur : 3119 - Référence monture : vowatersc4";C0553206552;vowatersc4;BD*1;BD;3
+21;-1;1;"204581 Utilisateur : 3046 - Référence monture : vokeelyc1";C0496100808;vokeelyc1;"PB DE FACE  REF CLIENT   SICARD  . MERCI  FACE*1";FACE;3
+22;-1;1;"204586 Utilisateur : 135 - Référence monture : vodohertyc3";C0139752130;vodohertyc3;;PB;3
+23;-1;1;"204594 Utilisateur : 2993 - Référence monture : fostreepc1";C0494453825;fostreepc1;FACE*1;FACE;3
+24;-1;1;"204595 Utilisateur : 1559 - Référence monture : vobyrnec3";C0328500500;vobyrnec3;BD*1;BD;3
+25;-1;1;"204596 Utilisateur : 3032 - Référence monture : fokirkc2";C0494923072;fokirkc2;"ref rime bruneau";PB;3
+26;-1;1;"204597 Utilisateur : 1808 - Référence monture : logibusc2";C0384523451;logibusc2;"Face cassée en deux - réf client Cretin Ilona FACE*1";FACE;3
+27;-1;1;"204598 Utilisateur : 4191 - Référence monture : fodiazc1";C0299391507;fodiazc1;PLAQUETTES*2;PLAQUETTES;3
+28;-1;1;"204601 Utilisateur : 1151 - Référence monture : logibusc2";C0299660606;logibusc2;BG*1;BG;3
+29;-1;1;"204602 Utilisateur : 1151 - Référence monture : voosbournec4";C0299660606;voosbournec4;BD*1;BD;3
+30;-1;1;"204611 Utilisateur : 3018 - Référence monture : vobenatarc2";C0494732466;vobenatarc2;FACE*1;FACE;3
+31;-1;1;"204612 Utilisateur : 835 - Référence monture : fofreemanc3";C0241306232;fofreemanc3;FACE*1;FACE;3
+32;-1;1;"204621 Utilisateur : 3621 - Référence monture : foorlanc2";C0479546708;foorlanc2;"Bonjour,   Avez vous d'autre SAV sur cette monture car cela fait deux fois que cette monture casse au niveau du tenon qui est tenu dans la face !  FACE*1";FACE;3
+33;-1;1;"204639 Utilisateur : 810 - Référence monture : lorockcityc3";C0240791153;lorockcityc3;BG*1;BG;3
+34;-1;1;"204645 Utilisateur : 1255 - Référence monture : vorowntreec3";C0320986640;vorowntreec3;BD*1;BD;3
+35;-1;1;"204650 Utilisateur : 4796 - Référence monture : vobenatarc2";C0546387868;vobenatarc2;FACE*1;FACE;3
+36;-1;1;"204679 Utilisateur : 1233 - Référence monture : voenoc3";C0320732573;voenoc3;"REF PORTEUR: DAUCHY152 PLAQUETTES*4";PLAQUETTES;3
+37;-1;1;"204682 Utilisateur : 3184 - Référence monture : vohookc1";C0556354981;vohookc1;"les rivets ont laché. FACE*1";FACE;3
+38;-1;1;"204686 Utilisateur : 4254 - Référence monture : voreinhardtc2";C0477561232;voreinhardtc2;"Fayard Martine FACE*1";FACE;3

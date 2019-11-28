@@ -16,6 +16,7 @@ class Sav
 	protected $servicecallid=array();
 	protected $nblines;
 	protected $customercode;
+	protected $today ;  
 	function __construct($filename)
 	{
 		$fichier = $filename;
@@ -95,54 +96,150 @@ class Sav
 					$this->upiece[]='PB';
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					} 					 					 
 				}else if($ligne[8]!=""){
 					$this->upiece[]='BG';
 					$this->subject[]=trim($ligne[6]." BG*".intval($ligne[8]));
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}else if ($ligne[9]!="") {
 					$this->upiece[]='BD';
 					$this->subject[]=trim($ligne[6]." BD*".intval($ligne[9]));
+					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}else if ($ligne[10]!="") {
-					$this->upiece[]='VO';
-					$this->subject[]=trim($ligne[6]." VO*".intval($ligne[10]));
+					$this->upiece[]='VERRESPOLA';
+					$this->subject[]=trim($ligne[6]." VERRES OPTIQUES*".intval($ligne[10]));
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}else if ($ligne[11]!="") {
-					$this->upiece[]='VS';
-					$this->subject[]=trim($ligne[6]." VS*".intval($ligne[11]));
+					$this->upiece[]='VERRESPOLA';
+					$this->subject[]=trim($ligne[6]." VERRES SOLAIRES*".intval($ligne[11]));
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}else if ($ligne[12]!="") {
 					$this->upiece[]='FACE';
 					$this->subject[]=trim($ligne[6]." FACE*".intval($ligne[12]));
 					$this->itemcode[] = $ligne[5];
-				}else if ($ligne[13]!='' OR $ligne[14]=="" OR $ligne[15]!="" OR $ligne[18]!="") {
-					$this->upiece[]='VISERIE';
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
+				}else if ( $ligne[14]!='' || $ligne[15]!='' || $ligne[16]!='' ||  $ligne[19]!="" ) {
+					$this->upiece[]='VIS';
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}else if ($ligne[16]!='' XOR ($ligne[19]!='' && $ligne[20]!='')) {
-					$this->upiece[]='MANCHON';
+					$this->upiece[]='PB';
 					$this->subject[]=$ligne[16];
-					$this->subject[]=trim($ligne[6]." MANCHON*".intval($ligne[16]));
+					$this->subject[]=trim($ligne[6]." PB*".intval($ligne[16]));
 					$this->itemcode[] = $ligne[5];
-				}else if ($ligne[18]!="") {
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
+				}else if ( $ligne[18]!='' ) {
 					$this->upiece[]='PLAQUETTES';
 					$this->subject[]=trim($ligne[6]." PLAQUETTES*".intval($ligne[18]));
 					$this->itemcode[] = $ligne[5];
-				}else if ($ligne[21]!="") {
-					$this->upiece[]='MANCHOND';
-					$this->subject[]=trim($ligne[6]." MANCHON*".intval($ligne[21]));
-					$this->itemcode[] = $ligne[5];
-				}else if ($ligne[22]!="" ) {
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
+				}else if ($ligne[13]!="" || $ligne[22]!="" || $ligne[23]!="") {
 					$this->upiece[]='TENON';
-					$this->subject[]=trim($ligne[6]." TENON*".intval($ligne[22]));
+					$this->subject[]=trim($ligne[6]." TENON*".intval($ligne[21]));
 					$this->itemcode[] = $ligne[5];
-				}else if ($ligne[23]!="") {
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}
+				}else if ($ligne[24]!="") {
 					$this->upiece[]='CLIP';
 					$this->subject[]=trim($ligne[6]." CLIP*".intval($ligne[23]));
-					$this->itemcode[] = "vc".subtr($ligne[5],2);
+					$this->itemcode[] = "vc".substr ($ligne[5],2);
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}					
 				}else {
 					$this->upiece[]='MONTURE';
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+					}					
 				}
 			}
 		}
@@ -200,7 +297,48 @@ class Sav
 		}
 		return $this->customercode;		
 	}
-
+	function afficherOutput() {
+		$tab="<table border='1'>";
+		$tab.="
+		<tr>
+		<td>ServiceCallID</td>
+		<td>origin</td>
+		<td>description</td>
+		<td>CustomerCode</td>
+		<td>CustomerCode</td>
+		<td>ItemCode</td>
+		<td>subject</td>
+		<td>U_Piece</td>
+		<td>ProblemType</td>
+		</tr>";
+		$tab.="
+		<tr>
+		<td>ServiceCallID</td>
+		<td>origin</td>
+		<td>description</td>
+		<td>CustomerCode</td>
+		<td>CustomerCode</td>
+		<td>ItemCode</td>
+		<td>subject</td>
+		<td>U_Piece</td>
+		<td>ProblemType</td>
+		</tr>";
+		for($i=0;$i<$this->nblines-1;$i++){
+			$tab.="<tr>";
+			$tab.="<td>".$this->linesTab[$i]["callid"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["origin"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["calltype"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["description"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["customercode"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["itemcode"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["subject"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["upiece"]."</td>";
+			$tab.="<td>".$this->linesTab[$i]["problemetype"]."</td>";
+			$tab.="</tr>";
+		}
+		$tab.="</table>";
+		return $tab;		
+	}
 	function generate(){
 		$this->uPiece();
 		$callid=$this->getServiceCallId();
@@ -227,6 +365,55 @@ class Sav
 			);
 		}
 		return $this->linesTab;
+	}
+	function getDate(){
+		 return date("dmY");
+	}
+	function createFichier($nom_fichier){
+		// Paramétrage de l'écriture du futur fichier CSV
+		$chemin = $nom_fichier."_".$this->getDate().".csv";
+		$delimiteur = ';'; // Pour une tabulation, utiliser $delimiteur = "t";
+
+		// Création du fichier csv (le fichier est vide pour le moment)
+		// w+ : consulter http://php.net/manual/fr/function.fopen.php
+		$fichier_csv = fopen($chemin, 'w+');
+
+		// Si votre fichier a vocation a être importé dans Excel,
+		// vous devez impérativement utiliser la ligne ci-dessous pour corriger
+		// les problèmes d'affichage des caractères internationaux (les accents par exemple)
+		fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
+		$ligne0 = array(
+				'callid' => "ServiceCallID",
+				'origin' =>"origin",
+				'calltype'=>"callType",
+				'description'=>"description",
+				'customercode'=>"CustomerCode",
+				'itemcode'=>"ItemCode",
+				'subject'=>"subject",
+				'upiece'=>"U_Piece",
+				'problemetype'=>"ProblemType"
+			);
+		fputcsv($fichier_csv, $ligne0, $delimiteur);
+		$ligne1 = array(
+				'callid' => "callID",
+				'origin' =>"origin",
+				'calltype'=>"callType",
+				'description'=>"description",
+				'customercode'=>"CustomerCode",
+				'itemcode'=>"ItemCode",
+				'subject'=>"subject",
+				'upiece'=>"U_Piece",
+				'problemetype'=>"ProblemType"
+			);		
+		fputcsv($fichier_csv, $ligne1, $delimiteur);
+		// Boucle foreach sur chaque ligne du tableau
+		foreach($this->linesTab as $ligne){			
+			// chaque ligne en cours de lecture est insérée dans le fichier
+			// les valeurs présentes dans chaque ligne seront séparées par $delimiteur
+			fputcsv($fichier_csv, $ligne, $delimiteur);
+		}
+		// fermeture du fichier csv
+		fclose($fichier_csv);		
 	}
 }
 

@@ -81,29 +81,28 @@ function afficher_tableau($tab){
 	echo "</table>";
 }
 function create_fichier($nom_fichier,$tab){
-// Paramétrage de l'écriture du futur fichier CSV
-$chemin = $nom_fichier;
-$delimiteur = ';'; // Pour une tabulation, utiliser $delimiteur = "t";
+	// Paramétrage de l'écriture du futur fichier CSV
+	$chemin = $nom_fichier;
+	$delimiteur = ';'; // Pour une tabulation, utiliser $delimiteur = "t";
 
-// Création du fichier csv (le fichier est vide pour le moment)
-// w+ : consulter http://php.net/manual/fr/function.fopen.php
-$fichier_csv = fopen($chemin, 'w+');
+	// Création du fichier csv (le fichier est vide pour le moment)
+	// w+ : consulter http://php.net/manual/fr/function.fopen.php
+	$fichier_csv = fopen($chemin, 'w+');
 
-// Si votre fichier a vocation a être importé dans Excel,
-// vous devez impérativement utiliser la ligne ci-dessous pour corriger
-// les problèmes d'affichage des caractères internationaux (les accents par exemple)
-fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
+	// Si votre fichier a vocation a être importé dans Excel,
+	// vous devez impérativement utiliser la ligne ci-dessous pour corriger
+	// les problèmes d'affichage des caractères internationaux (les accents par exemple)
+	fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
 
-// Boucle foreach sur chaque ligne du tableau
-foreach($tab as $ligne){
-	// chaque ligne en cours de lecture est insérée dans le fichier
-	// les valeurs présentes dans chaque ligne seront séparées par $delimiteur
-	fputcsv($fichier_csv, $ligne, $delimiteur);
-}
+	// Boucle foreach sur chaque ligne du tableau
+	foreach($tab as $ligne){
+		// chaque ligne en cours de lecture est insérée dans le fichier
+		// les valeurs présentes dans chaque ligne seront séparées par $delimiteur
+		fputcsv($fichier_csv, $ligne, $delimiteur);
+	}
 
-// fermeture du fichier csv
-fclose($fichier_csv);
-
+	// fermeture du fichier csv
+	fclose($fichier_csv);
 }
 afficher_tableau($adresse_tab);
 create_fichier("etrangers_generes.csv",$adresse_tab);

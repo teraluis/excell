@@ -254,7 +254,7 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}					
 				}else if ($ligne[12]!="" && ($ligne[8]!="" || $ligne[9]!="" || $ligne[7]!="")) {
-					$this->upiece[]='MONTURE';
+					$this->upiece[]='Monture';
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
 					if( intval($ligne[18])>1 ){
@@ -269,7 +269,7 @@ class Sav
 						$this->itemcode[] = $first."c".substr ($ligne[5],2);						
 					}
 				}else {
-					$this->upiece[]='MONTURE';
+					$this->upiece[]='Monture';
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
 					if( intval($ligne[18])>1 ){
@@ -411,6 +411,29 @@ class Sav
 	}
 	function getDate(){
 		 return date("dmY");
+	}
+	function envoiMail($mail){
+	$to  = $mail; // notez la virgule
+
+     // Sujet
+     $subject = 'Les SAV sont sur SAP Business ONE';
+
+     // message
+     $message = "<h1>Bonjour l'équipe de l'ADV</h1>";
+     $message .= "<p>Je vous informe que l'importation des SAV WEB ont été importes sans erreur ils seront disponibles d'ici 1 à 2 minutes sur SAP</p>";
+     $message .= "<p>Nombre des sav web :".$this->getNblines()."</p>";
+     // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+     $headers[] = 'MIME-Version: 1.0';
+     $headers[] = 'Content-type: text/html; charset=UTF-8';
+
+     // En-têtes additionnels
+     //$headers[] = 'To: MR <mr@example.com>, Mr <mr@example.com>';
+     $headers[] = 'From: Informatique <luismanresa@angeleyes-eyewear.com>';
+     $headers[] = 'Cc: informatique@angeleyes-eyewear.com';
+     //$headers[] = 'Bcc: vinylfactory@vinylfactory.com';
+
+     // Envoi
+     mail($to, $subject, $message, implode("\r\n", $headers));
 	}
 	function createFichier($nom_fichier){
 		// Paramétrage de l'écriture du futur fichier CSV

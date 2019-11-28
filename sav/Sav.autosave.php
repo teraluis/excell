@@ -91,9 +91,14 @@ class Sav
 	}
 	function uPiece(){
 		foreach($this->csv as $ligne){
+			
 			if($ligne[0]!="" && $ligne[0]!="id"){
 				if(($ligne[7]!='' XOR ($ligne[8]!="" && $ligne[9]!="" ) )  ) {
-					$this->upiece[]='PB';
+					if($ligne[12]!=''){
+						$this->upiece[]='Monture';
+					}else {
+						$this->upiece[]='PB';
+					}
 					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
 					if( intval($ligne[18])>1 ){
@@ -248,6 +253,21 @@ class Sav
 					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}					
+				}else if ($ligne[12]!="" && ($ligne[8]!="" || $ligne[9]!="" || $ligne[7]!="")) {
+					$this->upiece[]='MONTURE';
+					$this->subject[]=$ligne[6];
+					$this->itemcode[] = $ligne[5];
+					if( intval($ligne[18])>1 ){
+						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
+					}
+					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
+						$this->itemcode[].=" VIS*".intval($ligne[18]);						
+					}
+					if( intval($ligne[24])>1 ){
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);						
+					}
 				}else {
 					$this->upiece[]='MONTURE';
 					$this->subject[]=$ligne[6];

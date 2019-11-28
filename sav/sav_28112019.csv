@@ -11,7 +11,7 @@ callID;origin;callType;description;CustomerCode;ItemCode;subject;U_Piece;Problem
 9;-1;1;"204515 Utilisateur : 3383 - Référence monture : logibusc3";C0562264179;logibusc3;;PB;3
 10;-1;1;"204521 Utilisateur : 2126 - Référence monture : loglazartc3";C0442397601;loglazartc3;"CHAPEY FACE*1";FACE;3
 11;-1;1;"204522 Utilisateur : 3550 - Référence monture : loartschoolc3";C0980362785;loartschoolc3;"casse soudure FACE*1";FACE;3
-12;-1;1;"204526 Utilisateur : 1458 - Référence monture : vogouldingc2";C0326261520;vogouldingc2;;PB;3
+12;-1;1;"204526 Utilisateur : 1458 - Référence monture : vogouldingc2";C0326261520;vogouldingc2;;Monture;3
 13;-1;1;"204530 Utilisateur : 3753 - Référence monture : lsthelkac1";C0231502408;lsthelkac1;"RIBEIRO ELYSE FACE*1";FACE;3
 14;-1;1;"204539 Utilisateur : 4967 - Référence monture : loorangepeelc2";C0228236890;loorangepeelc2;"ref prudhomme BG*1";BG;3
 15;-1;1;"204540 Utilisateur : 3704 - Référence monture : foabernathyc1";C0432819180;foabernathyc1;PLAQUETTES*10;PLAQUETTES;3

@@ -103,7 +103,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);						
 					} 					 					 
 				}else if($ligne[8]!=""){
 					$this->upiece[]='BG';
@@ -116,7 +118,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
 					}					
 				}else if ($ligne[9]!="") {
 					$this->upiece[]='BD';
@@ -129,7 +133,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);						
 					}					
 				}else if ($ligne[10]!="") {
 					$this->upiece[]='VERRESPOLA';
@@ -142,7 +148,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
 					}					
 				}else if ($ligne[11]!="") {
 					$this->upiece[]='VERRESPOLA';
@@ -155,7 +163,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
 					}					
 				}else if ($ligne[12]!="") {
 					$this->upiece[]='FACE';
@@ -168,7 +178,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);		
+						$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);				
 					}					
 				}else if ( $ligne[14]!='' || $ligne[15]!='' || $ligne[16]!='' ||  $ligne[19]!="" ) {
 					$this->upiece[]='VIS';
@@ -178,7 +190,9 @@ class Sav
 						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);												
 					}					
 				}else if ($ligne[16]!='' XOR ($ligne[19]!='' && $ligne[20]!='')) {
 					$this->upiece[]='PB';
@@ -192,7 +206,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);												
 					}					
 				}else if ( $ligne[18]!='' ) {
 					$this->upiece[]='PLAQUETTES';
@@ -202,10 +218,12 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);					
 					}					
 				}else if ($ligne[13]!="" || $ligne[22]!="" || $ligne[23]!="") {
-					$this->upiece[]='TENON';
+					$this->upiece[]='PB';
 					$this->subject[]=trim($ligne[6]." TENON*".intval($ligne[21]));
 					$this->itemcode[] = $ligne[5];
 					if( intval($ligne[18])>1 ){
@@ -215,12 +233,15 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);					
 					}
 				}else if ($ligne[24]!="") {
 					$this->upiece[]='CLIP';
 					$this->subject[]=trim($ligne[6]." CLIP*".intval($ligne[23]));
-					$this->itemcode[] = "vc".substr ($ligne[5],2);
+					$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);
 					if( intval($ligne[18])>1 ){
 						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
 					}
@@ -238,7 +259,9 @@ class Sav
 						$this->itemcode[].=" VIS*".intval($ligne[18]);						
 					}
 					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);						
+						$this->itemcode[].=" CLIP*".intval($ligne[24]);
+						$first=substr($ligne[5], 0,1);
+						$this->itemcode[] = $first."c".substr ($ligne[5],2);						
 					}					
 				}
 			}

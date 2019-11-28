@@ -16,7 +16,9 @@ class Sav
 	protected $servicecallid=array();
 	protected $nblines;
 	protected $customercode;
-	protected $today ;  
+	protected $today ;
+	protected $nomfichier;
+	protected $taillefichier;  
 	function __construct($filename)
 	{
 		$fichier = $filename;
@@ -438,6 +440,7 @@ class Sav
 	function createFichier($nom_fichier){
 		// Paramétrage de l'écriture du futur fichier CSV
 		$chemin = $nom_fichier."_".$this->getDate().".csv";
+		$this->nomfichier=$chemin;
 		$delimiteur = ';'; // Pour une tabulation, utiliser $delimiteur = "t";
 
 		// Création du fichier csv (le fichier est vide pour le moment)
@@ -479,8 +482,27 @@ class Sav
 			fputcsv($fichier_csv, $ligne, $delimiteur);
 		}
 		// fermeture du fichier csv
-		fclose($fichier_csv);		
+		fclose($fichier_csv);
+		$this->taillefichier=filesize($chemin);		
 	}
+	function getTaillefichier(){
+		return $this->taillefichier;
+	}
+	function getNomfichier(){
+		return $this->nomfichier;
+	}
+	  function forcerTelechargement()
+	  {
+	  	$poids = $this->getTaillefichier();
+	    header('Content-Type: application/octet-stream');
+	    header('Content-Length: '. $poids);
+	    header('Content-disposition: attachment; filename='.$this->getNomfichier() );
+	    header('Pragma: no-cache');
+	    header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+	    header('Expires: 0');
+	    //readfile($this->getNomfichier());
+	    exit();
+	  }	
 }
 
 ?>

@@ -150,57 +150,42 @@ class Sav
 			$tenondroit=$ligne[23];
 			$clip=$ligne[24];
 				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) XOR ($manchondroit!="" && $manchongauche!="" ) XOR ($tenongauche!="" && $tenondroit!="" ) ) {
-					if($face!=''){
+					if(strlen($face)!=0){
 						$this->upiece[]='Monture';
 					}else {
 						$this->upiece[]='PB';
-					}
-					$this->itemcode[] = $ligne[5];
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne)); 					 
+					}				 
 				}else if( ($branchegauche!="" || $tenongauche!='' || $manchongauche!='') && $face=='' && $branchedroite=='' && $tenondroit=='' && $manchondroit==''){
-					$this->upiece[]='BG';					
-					$this->itemcode[] = $ligne[5];
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));				
+					$this->upiece[]='BG';					 				
 				}else if ( ($branchedroite!="" || $tenondroit!='' || $manchondroit!='') && $face=='' && $branchegauche=='' && $tenongauche=='' && $manchongauche=='') {
-					$this->upiece[]='BD';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];				
+					$this->upiece[]='BD';		
 				}else if ($verrespresentation!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
-					$this->upiece[]='VERRESPOLA';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];					
+					$this->upiece[]='VERRESPOLA';					
 				}else if ($verressolaires!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
-					$this->upiece[]='VERRESPOLA';
-					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];				
+					$this->upiece[]='VERRESPOLA';			
 				}else if ($face!="" && $branchedroite=="" && $branchegauche=="" && $tenongauche=="" && $tenondroit=="" && $manchongauche=="" && $manchondroit=="") {
-					$this->upiece[]='FACE';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];					
+					$this->upiece[]='FACE';					
 				}else if ( $visplaquettes!='' || $visface!='' || $visbranche!='' ||  $vis!="" && $face=="" && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='') {
-					$this->upiece[]='VIS';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];					
+					$this->upiece[]='VIS';				
 				}else if ( $plaquettes!='' && $face=='' && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='' ) {
 					$this->upiece[]='PLAQUETTES';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];					
 				}else if ($clip!="" && $face=='' && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='' ) {
-					$this->upiece[]='CLIP';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);				
+					$this->upiece[]='CLIP';			
 				}else if ( ($face!='' &&  ($branchegauche!='' || $branchedroite!='' ) ) XOR ($face!='' && ($manchondroit!='' || $manchongauche!='')) 
 					XOR ($face!='' && ($tenondroit!='' || $tenongauche!=''))
 			  ) {
-					$this->upiece[]='Monture';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];
+					$this->upiece[]='Monture';		
 				}else {
-					$this->upiece[]='Monture';
-					$this->subject[]=trim($ligne[6]."Ref ".$this->commentairesenplus($ligne));
-					$this->itemcode[] = $ligne[5];					
+					$this->upiece[]='Monture'; 										
 				}
+				if (!empty($clip)) {
+					$first=substr($ligne[5], 0,1);
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);				
+				}else {
+					$this->itemcode[] = $ligne[5];
+				}
+				$subjtmp=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+				$this->subject[]=(empty($subjtmp))?"Ref":$subjtmp;				
 			}
 		}
 

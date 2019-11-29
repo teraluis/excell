@@ -115,7 +115,7 @@ class Sav
 			$subject.=" PLAQUETTES*".intval($ligne[18]);						
 		}
 		if( intval($vis)>=1 || intval($visplaquettes)>=1 || intval($visface)>=1 || intval($visbranche)>=1){
-			$subject.=" VIS*2";						
+			$subject.=" VIS*".intval($vis);						
 		}
 		if( intval($ligne[24])>1 ){
 			$subject.=" CLIP*".intval($ligne[24]);
@@ -157,7 +157,7 @@ class Sav
 					}
 					$this->itemcode[] = $ligne[5];
 					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne)); 					 
-				}else if( ($branchegauche!="" || $tenongauche!='' || $manchongauche!='')  && $branchedroite=='' && $tenondroit=='' && $manchondroit==''){
+				}else if( ($branchegauche!="" || $tenongauche!='' || $manchongauche!='') && $face=='' && $branchedroite=='' && $tenondroit=='' && $manchondroit==''){
 					$this->upiece[]='BG';					
 					$this->itemcode[] = $ligne[5];
 					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));				

@@ -91,200 +91,115 @@ class Sav
 		$tab.="</table>";
 		return $tab;
 	}
+	function commentairesenplus($ligne){
+		$pairebranches=$ligne[7];
+		$branchegauche=$ligne[8];
+		$branchedroite=$ligne[9];
+		$verrespresentation=$ligne[10];
+		$verressolaires=$ligne[11];
+		$face=$ligne[12];
+		$tenon=$ligne[13];
+		$visplaquettes=$ligne[14];
+		$visface=$ligne[15];
+		$visbranche=$ligne[16];
+		$manchon=$ligne[17];
+		$plaquettes=$ligne[18];
+		$vis=$ligne[19];
+		$manchongauche=$ligne[20];
+		$manchondroit=$ligne[21];
+		$tenongauche=$ligne[22];
+		$tenondroit=$ligne[23];
+		$clip=$ligne[24];		
+		$subject="";
+		if( intval($plaquettes)>=1 ){
+			$subject.=" PLAQUETTES*".intval($ligne[18]);						
+		}
+		if( intval($vis)>=1 || intval($visplaquettes)>=1 || intval($visface)>=1 || intval($visbranche)>=1){
+			$subject.=" VIS*2";						
+		}
+		if( intval($ligne[24])>1 ){
+			$subject.=" CLIP*".intval($ligne[24]);
+			$first=substr($ligne[5], 0,1);
+		$subject = $first."c".substr ($ligne[5],2);						
+		}
+		if(intval($verrespresentation)>1 || intval($verressolaires)>1){
+			$subject.=" verrespresentation*2";
+		} 
+		return $subject;		
+	}
 	function uPiece(){
 		foreach($this->csv as $ligne){
-			
+
 			if($ligne[0]!="" && $ligne[0]!="id"){
-				if(($ligne[7]!='' XOR ($ligne[8]!="" && $ligne[9]!="" ) )  ) {
-					if($ligne[12]!=''){
+			$pairebranches=$ligne[7];
+			$branchegauche=$ligne[8];
+			$branchedroite=$ligne[9];
+			$verrespresentation=$ligne[10];
+			$verressolaires=$ligne[11];
+			$face=$ligne[12];
+			$tenon=$ligne[13];
+			$visplaquettes=$ligne[14];
+			$visface=$ligne[15];
+			$visbranche=$ligne[16];
+			$manchon=$ligne[17];
+			$plaquettes=$ligne[18];
+			$vis=$ligne[19];
+			$manchongauche=$ligne[20];
+			$manchondroit=$ligne[21];
+			$tenongauche=$ligne[22];
+			$tenondroit=$ligne[23];
+			$clip=$ligne[24];
+				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) XOR ($manchondroit!="" && $manchongauche!="" ) XOR ($tenongauche!="" && $tenondroit!="" ) ) {
+					if($face!=''){
 						$this->upiece[]='Monture';
 					}else {
 						$this->upiece[]='PB';
 					}
-					$this->subject[]=$ligne[6];
 					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);						
-					} 					 					 
-				}else if($ligne[8]!=""){
-					$this->upiece[]='BG';
-					$this->subject[]=trim($ligne[6]." BG*".intval($ligne[8]));
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne)); 					 
+				}else if( ($branchegauche!="" || $tenongauche!='' || $manchongauche!='')  && $branchedroite=='' && $tenondroit=='' && $manchondroit==''){
+					$this->upiece[]='BG';					
 					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
-					}					
-				}else if ($ligne[9]!="") {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));				
+				}else if ( ($branchedroite!="" || $tenondroit!='' || $manchondroit!='') && $face=='' && $branchegauche=='' && $tenongauche=='' && $manchongauche=='') {
 					$this->upiece[]='BD';
-					$this->subject[]=trim($ligne[6]." BD*".intval($ligne[9]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);						
-					}					
-				}else if ($ligne[10]!="") {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];				
+				}else if ($verrespresentation!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
 					$this->upiece[]='VERRESPOLA';
-					$this->subject[]=trim($ligne[6]." VERRES OPTIQUES*".intval($ligne[10]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
-					}					
-				}else if ($ligne[11]!="") {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];					
+				}else if ($verressolaires!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
 					$this->upiece[]='VERRESPOLA';
-					$this->subject[]=trim($ligne[6]." VERRES SOLAIRES*".intval($ligne[11]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);					
-					}					
-				}else if ($ligne[12]!="") {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];				
+				}else if ($face!="" && $branchedroite=="" && $branchegauche=="" && $tenongauche=="" && $tenondroit=="" && $manchongauche=="" && $manchondroit=="") {
 					$this->upiece[]='FACE';
-					$this->subject[]=trim($ligne[6]." FACE*".intval($ligne[12]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);		
-						$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);				
-					}					
-				}else if ( $ligne[14]!='' || $ligne[15]!='' || $ligne[16]!='' ||  $ligne[19]!="" ) {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];					
+				}else if ( $visplaquettes!='' || $visface!='' || $visbranche!='' ||  $vis!="" && $face=="" && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='') {
 					$this->upiece[]='VIS';
-					$this->subject[]=$ligne[6];
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);												
-					}					
-				}else if ($ligne[16]!='' XOR ($ligne[19]!='' && $ligne[20]!='')) {
-					$this->upiece[]='PB';
-					$this->subject[]=$ligne[16];
-					$this->subject[]=trim($ligne[6]." PB*".intval($ligne[16]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);												
-					}					
-				}else if ( $ligne[18]!='' ) {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];					
+				}else if ( $plaquettes!='' && $face=='' && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='' ) {
 					$this->upiece[]='PLAQUETTES';
-					$this->subject[]=trim($ligne[6]." PLAQUETTES*".intval($ligne[18]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);					
-					}					
-				}else if ($ligne[13]!="" || $ligne[22]!="" || $ligne[23]!="") {
-					$this->upiece[]='PB';
-					$this->subject[]=trim($ligne[6]." TENON*".intval($ligne[21]));
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);	
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);					
-					}
-				}else if ($ligne[24]!="") {
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];					
+				}else if ($clip!="" && $face=='' && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='' ) {
 					$this->upiece[]='CLIP';
-					$this->subject[]=trim($ligne[6]." CLIP*".intval($ligne[23]));
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
 					$first=substr($ligne[5], 0,1);
-					$this->itemcode[] = $first."c".substr ($ligne[5],2);
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}					
-				}else if ($ligne[12]!="" && ($ligne[8]!="" || $ligne[9]!="" || $ligne[7]!="")) {
+					$this->itemcode[] = $first."c".substr ($ligne[5],2);				
+				}else if ( ($face!='' &&  ($branchegauche!='' || $branchedroite!='' ) ) XOR ($face!='' && ($manchondroit!='' || $manchongauche!='')) 
+					XOR ($face!='' && ($tenondroit!='' || $tenongauche!=''))
+			  ) {
 					$this->upiece[]='Monture';
-					$this->subject[]=$ligne[6];
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
 					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);						
-					}
 				}else {
 					$this->upiece[]='Monture';
-					$this->subject[]=$ligne[6];
-					$this->itemcode[] = $ligne[5];
-					if( intval($ligne[18])>1 ){
-						$this->itemcode[].=" PLAQUETTES*".intval($ligne[18]);						
-					}
-					if( intval($ligne[19])>1 || intval($ligne[14])>1 || intval($ligne[15])>1 || intval($ligne[16])>1){
-						$this->itemcode[].=" VIS*".intval($ligne[18]);						
-					}
-					if( intval($ligne[24])>1 ){
-						$this->itemcode[].=" CLIP*".intval($ligne[24]);
-						$first=substr($ligne[5], 0,1);
-						$this->itemcode[] = $first."c".substr ($ligne[5],2);						
-					}					
+					$this->subject[]=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+					$this->itemcode[] = $ligne[5];					
 				}
 			}
 		}
@@ -500,7 +415,7 @@ class Sav
 	    header('Pragma: no-cache');
 	    header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 	    header('Expires: 0');
-	    //readfile($this->getNomfichier());
+	    readfile($this->getNomfichier());
 	    exit();
 	  }	
 }

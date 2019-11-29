@@ -6,7 +6,7 @@ $sav->generate();
 echo $sav->afficher();	
 try {
 $sav->createFichier("sav");
-	$sav->envoiMail("luismanresa@angeleyes-eyewear.com");
+	/$sav->envoiMail("adv@angeleyes-eyewear.com");
 } catch (Exception $e) {
 	echo 'Exception reçue : ',  $e->getMessage(), "\n";
 }

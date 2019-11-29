@@ -7,14 +7,13 @@ $sav->generate();
 	
 try {
 	$sav->createFichier("sav");	
-	
-	echo $sav->afficherOutput();
 	//header("Location:suces.php");
 } catch (Exception $e) {
 	echo 'Exception reçue : ',  $e->getMessage(), "\n";
 	die();
 }
+$sav->forcerTelechargement();
+echo $sav->afficherOutput();
 //sleep(60*15);
-//$sav->forcerTelechargement();
 //$sav->envoiMail("adv@angeleyes-eyewear.com");
 ?>

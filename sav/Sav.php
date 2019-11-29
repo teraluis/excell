@@ -331,11 +331,12 @@ class Sav
      // En-têtes additionnels
      //$headers[] = 'To: MR <mr@example.com>, Mr <mr@example.com>';
      $headers[] = 'From: Informatique <luismanresa@angeleyes-eyewear.com>';
-     $headers[] = 'Cc: informatique@angeleyes-eyewear.com';
+     //$headers[] = 'Cc: informatique@angeleyes-eyewear.com';
      //$headers[] = 'Bcc: vinylfactory@vinylfactory.com';
 
      // Envoi
-     mail($to, $subject, $message, implode("\r\n", $headers));
+     $envoye=mail($to, $subject, $message, implode("\r\n", $headers));
+     return $envoye;
 	}
 	function createFichier($nom_fichier){
 		// Paramétrage de l'écriture du futur fichier CSV

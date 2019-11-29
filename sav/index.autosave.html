@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>SAV</title>
+	<meta charset="utf-8">
 <style type="text/css">
 .myButton {
 	box-shadow:inset 0px 10px 24px -19px #e67a73;
@@ -36,17 +37,18 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:25px;
-	padding:17px 56px;
+	padding:25px 56px;
 	text-decoration:none;
 	text-shadow:5px 3px 10px #2f6627;
-	float: right;
+	position: absolute;
+	right: 10%;
 }
 .afficher:hover {
 	background-color:#5cbf2a;
 }
 .afficher:active {
-	position:relative;
-	top:1px;
+	position: absolute;
+	right: 10%;
 }	
 </style>	
 
@@ -54,14 +56,14 @@
 <body>
 <h3 id="titre" >vous pouvez ici afficher ou télecharger les sav</h3>
 <a href="telecharger.php" class="myButton">TELECHARGER</a>
-<a href="afficher" target="_blank" class="afficher">afficher</a>
+<a href="afficher" target="_blank" class="afficher">AFFICHER</a>
 <script type="text/javascript">
 	var d = new Date();
 	var year = d.getFullYear();
 	var month = d.getMonth();
 	var day = d.getDay();
 	var titre = document.getElementById("titre");
-	titre.innerHTML="telechargement des sav du "+day+"/"+"/"+month+"/"+year;
+	titre.innerHTML="telechargement des sav du "+day+"/"+""+month+"/"+year;
 </script>
 </body>
 </html>

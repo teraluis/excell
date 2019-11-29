@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SAV</title>
+	<meta charset="utf-8">
+<style type="text/css">
+.myButton {
+	box-shadow:inset 0px 10px 24px -19px #e67a73;
+	background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
+	background-color:#e4685d;
+	border-radius:14px;
+	border:3px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	padding:24px 68px;
+	text-decoration:none;
+	text-shadow:0px 4px 0px #b23e35;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #eb675e 5%, #e4685d 100%);
+	background-color:#eb675e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.afficher {
+	box-shadow: 15px 12px 13px -4px #3dc21b;
+	background-color:#44c767;
+	border-radius:11px;
+	border:3px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	padding:17px 56px;
+	text-decoration:none;
+	text-shadow:5px 3px 10px #2f6627;
+	float: right;
+}
+.afficher:hover {
+	background-color:#5cbf2a;
+}
+.afficher:active {
+	position:relative;
+	top:1px;
+}	
+</style>	
+
+</head>
+<body>
+<h3 id="titre" >vous pouvez ici afficher ou télecharger les sav</h3>
+<a href="telecharger.php" class="myButton">TELECHARGER</a>
+<a href="afficher" target="_blank" class="afficher">afficher</a>
+<script type="text/javascript">
+	var d = new Date();
+	var year = d.getFullYear();
+	var month = d.getMonth();
+	var day = d.getDay();
+	var titre = document.getElementById("titre");
+	titre.innerHTML="telechargement des sav du "+day+"/"+""+month+"/"+year;
+</script>
+</body>
+</html>

@@ -146,11 +146,11 @@ class CommandesLine extends Fichier {
 		$ligne0 = array(
 				'parentkey' => "Parentkey",
 				'linenum' =>"Linenum",
-				'comments'=>"comments",
-				'docduedate1'=>"docduedate",
+				'comments'=>"Comments",
+				'docduedate1'=>"DocDueDate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode",
-				'itemcode'=>"itemcode",
+				'itemcode'=>"Itemcode",
 				'quantity'=>"Quantity",
 				'discount'=>"DiscountPercent"
 			);
@@ -159,10 +159,10 @@ class CommandesLine extends Fichier {
 				'parentkey' => "Parentkey",
 				'linenum' =>"Linenum",
 				'comments'=>"Comments",
-				'docduedate1'=>"DocdueDate",
+				'docduedate1'=>"DocDueDate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode",
-				'itemcode'=>"itemcode",
+				'itemcode'=>"Itemcode",
 				'quantity'=>"Quantity",
 				'discount'=>"DiscPrcnt"
 			);		

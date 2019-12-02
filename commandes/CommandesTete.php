@@ -114,17 +114,17 @@ class CommandesTete extends Fichier {
 		// les problèmes d'affichage des caractères internationaux (les accents par exemple)
 		fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
 		$ligne0 = array(
-				'parentkey' => "Parentkey",
-				'comments'=>"comments",
-				'docduedate1'=>"docduedate",
+				'parentkey' => "ParentKey",
+				'comments'=>"Comments",
+				'docduedate1'=>"DocDuedate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode"
 			);
 		fputcsv($fichier_csv, $ligne0, $delimiteur);
 		$ligne1 = array(
-				'parentkey' => "Parentkey",
-				'comments'=>"comments",
-				'docduedate1'=>"docduedate",
+				'parentkey' => "ParentKey",
+				'comments'=>"Comments",
+				'docduedate1'=>"DocDuedate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode"
 			);		

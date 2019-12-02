@@ -99,7 +99,7 @@ class CommandesTete extends Fichier {
 		return $this->comments;
 	}
 	function createFichier(){
-		$nom_fichier="line";
+		$nom_fichier="tete";
 		// Paramétrage de l'écriture du futur fichier CSV
 		$chemin = $nom_fichier."_".$this->getDate().".csv";
 		$this->setNomfichier($chemin);

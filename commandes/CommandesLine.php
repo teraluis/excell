@@ -51,6 +51,7 @@ class CommandesLine extends Fichier {
 				}else {
 					$itemcode=$tmpitemcode;
 					$tmpquantity=explode('|', $quantity);
+					$pkey++;
 					for ($i=0; $i <count($tmpitemcode) ; $i++) { 
 						$this->itemcode[]=$tmpitemcode[$i];
 						$this->quantity[]=$tmpquantity[$i];

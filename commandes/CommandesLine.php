@@ -18,18 +18,7 @@ class CommandesLine extends Fichier {
 			}
 		}
 	}
-	public function generateTete(){
-		foreach ($this->csv as $lines) {
-			if(count($lines)>1){
-				$id=$lines[0];
-				$title=$lines[1];
-				$date=$lines[2];
-				$customercode=$line[4];
-				$itemcode=$line[5];				
-				var_dump($lines);
-			}
-		}
-	}
+
 	public function generateLine(){
 		$somme=0;
 		$pkey=0;
@@ -43,7 +32,7 @@ class CommandesLine extends Fichier {
 				$somme+=count($tmpitemcode);
 				$quantity=$lines[6];
 				$comments=$id." ".$title;
-				
+				$reduction=$lines[7];
 				if(count($tmpitemcode)==1){
 					$itemcode=$lines[5];
 					$this->itemcode[]=$itemcode;
@@ -53,7 +42,12 @@ class CommandesLine extends Fichier {
 					$this->comments[]=$comments;	
 					$this->docduedate[]=$date;	
 					$pkey++;
-					$this->parentkey[]=$pkey;		
+					$this->parentkey[]=$pkey;
+					if(substr($itemcode, 0,2)=="vo" || substr($itemcode, 0,2)=="vs" || substr($itemcode, 0,2)=="ic" || substr($itemcode, 0,2)=="fs" || substr($itemcode, 0,2)=="fo" || substr($itemcode, 0,2)=="mo" || substr($itemcode, 0,2)=="ms" || substr($itemcode, 0,2)=="lo" || substr($itemcode, 0,2)=="ls"){
+						$this->discount[]="0";
+					}else {
+						$this->discount[] =$reduction;
+					}					
 				}else {
 					$itemcode=$tmpitemcode;
 					$tmpquantity=explode('|', $quantity);
@@ -65,6 +59,11 @@ class CommandesLine extends Fichier {
 						$this->comments[]=$comments;
 						$this->docduedate[]=$date;
 						$this->parentkey[]=$pkey;
+						if(substr($tmpitemcode[$i], 0,2)=="vo" || substr($tmpitemcode[$i], 0,2)=="vs" || substr($tmpitemcode[$i], 0,2)=="ic" || substr($tmpitemcode[$i], 0,2)=="fs" || substr($tmpitemcode[$i], 0,2)=="fo" || substr($tmpitemcode[$i], 0,2)=="mo" || substr($tmpitemcode[$i], 0,2)=="ms" || substr($tmpitemcode[$i], 0,2)=="lo" || substr($tmpitemcode[$i], 0,2)=="ls"){
+							$this->discount[]="0";
+						}else {
+							$this->discount[] =$reduction;
+						}						
 					}
 				}
 							
@@ -73,6 +72,7 @@ class CommandesLine extends Fichier {
 		$this->nblines2=$somme;
 	}
 	function generate() {
+		$this->generateLine();
 		$tmptab=array();
 		$linenum=$this->getLinenum();
 		$parentkey=$this->getParentKey();
@@ -81,6 +81,7 @@ class CommandesLine extends Fichier {
 		$cardcode=$this->getCustomercode();
 		$itemcode=$this->getItemcode();
 		$quantity = $this->getQuantity();
+		$discount = $this->getDiscount();
 		for ($i=0; $i <$this->getNblines2() ; $i++) { 
 			$tmptab[]=array(
 				"parentKey" =>	$parentkey[$i],
@@ -90,7 +91,8 @@ class CommandesLine extends Fichier {
 				"docduedate2" => $docduedate[$i],
 				"cardcode"	  => $cardcode[$i],
 				"itemcode"	  => $itemcode[$i],
-				"quantity"		=> $quantity[$i]
+				"quantity"		=> $quantity[$i],
+				"reduction"		=> $discount[$i]
 			);
 		}
 		return $tmptab;
@@ -121,6 +123,9 @@ class CommandesLine extends Fichier {
 	}
 	function getComments(){
 		return $this->comments;
+	}
+	function getDiscount(){
+		return $this->discount;
 	}
 	function createFichier(){
 		$nom_fichier="line";

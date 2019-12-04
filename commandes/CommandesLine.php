@@ -144,25 +144,25 @@ class CommandesLine extends Fichier {
 		// les problèmes d'affichage des caractères internationaux (les accents par exemple)
 		fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
 		$ligne0 = array(
-				'parentkey' => "Parentkey",
-				'linenum' =>"Linenum",
+				'parentkey' => "ParentKey",
+				'linenum' =>"LineNum",
 				'comments'=>"Comments",
 				'docduedate1'=>"DocDueDate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode",
-				'itemcode'=>"Itemcode",
+				'itemcode'=>"ItemCode",
 				'quantity'=>"Quantity",
 				'discount'=>"DiscountPercent"
 			);
 		fputcsv($fichier_csv, $ligne0, $delimiteur);
 		$ligne1 = array(
-				'parentkey' => "Parentkey",
-				'linenum' =>"Linenum",
+				'parentkey' => "ParentKey",
+				'linenum' =>"LineNum",
 				'comments'=>"Comments",
 				'docduedate1'=>"DocDueDate",
 				'docduedate2'=>"DocDate",
 				'cardcode'=>"CardCode",
-				'itemcode'=>"Itemcode",
+				'itemcode'=>"ItemCode",
 				'quantity'=>"Quantity",
 				'discount'=>"DiscPrcnt"
 			);		

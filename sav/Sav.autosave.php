@@ -24,7 +24,7 @@ class Sav
 		$fichier = $filename;
 		$this->csv = new SplFileObject($fichier);
 		$this->csv->setFlags(SplFileObject::READ_CSV);
-		$this->csv->setCsvControl(';');
+		$this->csv->setCsvControl(',');
 		$this->nblines=$this->csv->seek(PHP_INT_MAX);
 		$this->nblines=$this->csv->key();
 	}
@@ -247,8 +247,8 @@ class Sav
 		$tab.="
 		<tr>
 		<td>ServiceCallID</td>
-		<td>origin</td>
-		<td>description</td>
+		<td>Origin</td>
+		<td>Description</td>
 		<td>CustomerCode</td>
 		<td>CustomerCode</td>
 		<td>ItemCode</td>

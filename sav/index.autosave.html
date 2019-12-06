@@ -50,6 +50,36 @@
 	position: absolute;
 	right: 10%;
 }	
+#mail {
+	box-shadow:inset 0px 10px 24px -19px #e67a73;
+	background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
+	background-color:#e4685d;
+	border-radius:14px;
+	border:3px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	padding:24px 68px;
+	text-decoration:none;
+	text-shadow:0px 4px 0px #b23e35;
+}
+#synchroniser {
+	box-shadow:inset 0px 10px 24px -19px #e67a73;
+	background:linear-gradient(to bottom, #e4685d 5%, #eb675e 100%);
+	background-color:#e4685d;
+	border-radius:14px;
+	border:3px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:28px;
+	padding:24px 68px;
+	text-decoration:none;
+	text-shadow:0px 4px 0px #b23e35;	
+}
 </style>	
 
 </head>
@@ -57,7 +87,12 @@
 <h3 id="titre" >vous pouvez ici afficher ou télecharger les sav</h3>
 <a href="telecharger.php" class="myButton">TELECHARGER</a>
 <a href="afficher" target="_blank" class="afficher">AFFICHER</a>
-<a href="envoyermail.php"></a>
+<div>
+<a href="envoyermail.php" id="mail">ENVOYER MAIL</a>
+</div>
+<div>
+<a href="telechargerfichiersource.php" id="synchroniser">SYNCHRONISER</a>
+</div>
 <script type="text/javascript">
 	var d = new Date();
 	var year = d.getFullYear();

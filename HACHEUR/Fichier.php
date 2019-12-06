@@ -16,8 +16,6 @@ abstract class Fichier
 		$this->csv->setCsvControl(';');
 		$this->nblines=$this->csv->seek(PHP_INT_MAX);
 		$this->nblines=$this->csv->key()-1;
-
-
 	}
 	public function getCabeza(){
 		return $this->cabeza;

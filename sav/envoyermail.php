@@ -20,8 +20,6 @@ if($retour==true){
 }else {
 	echo "<h1>Votrez Mail a rencontre un probleme et n'a pas pu partir :=(</h1>";
 }
-/*sleep(50);
-header("Location:http://localhost/excell/sav/");*/
 
 ?>
 <?php header("refresh:5;url=http://localhost/excell/sav/");?>

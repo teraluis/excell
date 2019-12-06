@@ -1,7 +1,4 @@
 <?php
-/**
- * 
- */
 abstract class Fichier 
 {
 	protected $linesTab;
@@ -10,6 +7,7 @@ abstract class Fichier
 	protected $today ;
 	public $nomfichier;
 	protected $taillefichier;  
+
 	function __construct($filename)
 	{
 		$fichier = $filename;
@@ -18,6 +16,11 @@ abstract class Fichier
 		$this->csv->setCsvControl(';');
 		$this->nblines=$this->csv->seek(PHP_INT_MAX);
 		$this->nblines=$this->csv->key()-1;
+
+
+	}
+	public function getCabeza(){
+		return $this->cabeza;
 	}
 	public function getNblines(){
 		return $this->nblines;
@@ -37,9 +40,6 @@ abstract class Fichier
 	public function setNomfichier($nomfichier){
 		$this->nomfichier=$nomfichier;
 	}		
-
-
-
 	public function forcerTelechargement()
 	  {
 	  	$poids = $this->getTaillefichier();

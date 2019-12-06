@@ -98,6 +98,31 @@ class CommandesTete extends Fichier {
 	function getComments(){
 		return $this->comments;
 	}
+	function envoiMail($mail){
+	$to  = $mail; // notez la virgule
+
+     // Sujet
+     $subject = 'Les Commandes sont en cour de chargement sur SAP Business ONE';
+
+     // message
+     $message = "<h4>Bonjour l'équipe de l'ADV</h4>";
+     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des Commandes WEB sont en cours ils seront disponibles d'ici quelques minutes sur SAP !</p> ";
+     $message .= "<p>Nombre des commandes web <strong>:".$this->getNblines()."</strong></p></div>";
+     $message .="<p>Bien Cordialment</p>";
+     // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
+     $headers[] = 'MIME-Version: 1.0';
+     $headers[] = 'Content-type: text/html; charset=UTF-8';
+
+     // En-têtes additionnels
+     //$headers[] = 'To: MR <mr@example.com>, Mr <mr@example.com>';
+     $headers[] = 'From: Informatique <luismanresa@angeleyes-eyewear.com>';
+     $headers[] = 'Cc: informatique@angeleyes-eyewear.com';
+     $headers[] = 'Bcc: luismanresa@angeleyes-eyewear.com';
+
+     // Envoi
+     $envoye=mail($to, $subject, $message, implode("\r\n", $headers));
+     return $envoye;
+	}	
 	function createFichier(){
 		$nom_fichier="tete";
 		// Paramétrage de l'écriture du futur fichier CSV

@@ -200,7 +200,7 @@ class Sav
 		return $this->itemcode;
 	}	
 	function getNblines(){
-		return $this->nblines;
+		return $this->nblines-1;
 	}
 	function getServiceCallId(){
 		for($i=0;$i<$this->getNblines();$i++){
@@ -318,12 +318,13 @@ class Sav
 	$to  = $mail; // notez la virgule
 
      // Sujet
-     $subject = 'Les SAV sont sur SAP Business ONE';
+     $subject = 'Les SAV sont en cour de chargement sur SAP Business ONE';
 
      // message
-     $message = "<h1>Bonjour l'équipe de l'ADV</h1>";
-     $message .= "<p>Je vous informe que l'importation des SAV WEB ont été importes sans erreur ils seront disponibles d'ici 1 à 2 minutes sur SAP</p>";
-     $message .= "<p>Nombre des sav web :".$this->getNblines()."</p>";
+     $message = "<h4>Bonjour l'équipe de l'ADV</h4>";
+     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des SAV WEB est en cours ils seront disponibles d'ici quelques minutes sur SAP !</p> ";
+     $message .= "<p>Nombre des sav web <strong>:".$this->getNblines()."</strong></p></div>";
+     $message .="<p>Bien Cordialment</p>";
      // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
      $headers[] = 'MIME-Version: 1.0';
      $headers[] = 'Content-type: text/html; charset=UTF-8';
@@ -331,8 +332,8 @@ class Sav
      // En-têtes additionnels
      //$headers[] = 'To: MR <mr@example.com>, Mr <mr@example.com>';
      $headers[] = 'From: Informatique <luismanresa@angeleyes-eyewear.com>';
-     //$headers[] = 'Cc: informatique@angeleyes-eyewear.com';
-     //$headers[] = 'Bcc: vinylfactory@vinylfactory.com';
+     $headers[] = 'Cc: informatique@angeleyes-eyewear.com';
+     $headers[] = 'Bcc: luismanresa@angeleyes-eyewear.com';
 
      // Envoi
      $envoye=mail($to, $subject, $message, implode("\r\n", $headers));

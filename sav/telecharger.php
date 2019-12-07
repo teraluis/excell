@@ -11,8 +11,4 @@ try {
 	die();
 }
 $sav->forcerTelechargement();
-//echo $sav->afficherOutput();
-//sleep(60*15);
-//$retour=$sav->envoiMail("adv@angeleyes-eyewear.com");
-$retour=$sav->envoiMail("luismanresaramirez@gmail.com");
 ?>

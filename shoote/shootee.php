@@ -6,7 +6,7 @@
 <body>
 <p>Ce script a pour but de  sortir les montures shootees non shootees</p>	
 <?php
-$fichier = 'montures_mazette.csv';
+$fichier = 'montures_rev.csv';
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
 $csv->setCsvControl(';');

@@ -34,5 +34,5 @@ function forcerTelechargement($chemin) {
 	readfile($chemin);
 	exit();
 }	
-forcerTelechargement($chemin);
+//forcerTelechargement($chemin);
 ?>

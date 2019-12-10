@@ -321,7 +321,7 @@ class Sav
 
      // message
      $message = "<h4>Bonjour l'équipe de l'ADV</h4>";
-     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des SAV WEB  est en termine  ils sont disponibles sur SAP Business One!</p> ";
+     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des SAV WEB via DTW est en termine  ils sont disponibles sur SAP Business One!</p> ";
      $message .= "<p>Nombre des sav web <strong>:".$this->getNblines()."</strong></p></div>";
      $message .="<p>Bien Cordialment</p>";
      // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini

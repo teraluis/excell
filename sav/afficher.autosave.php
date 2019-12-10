@@ -11,7 +11,7 @@ try {
 	die();
 }
 //$sav->forcerTelechargement();
-//echo $sav->afficherOutput();
+echo $sav->afficher();
 //sleep(60*15);
 //$sav->envoiMail("adv@angeleyes-eyewear.com");
 ?>

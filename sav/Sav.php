@@ -24,7 +24,7 @@ class Sav
 		$fichier = $filename;
 		$this->csv = new SplFileObject($fichier);
 		$this->csv->setFlags(SplFileObject::READ_CSV);
-		$this->csv->setCsvControl(',');
+		$this->csv->setCsvControl(';');
 		$this->nblines=$this->csv->seek(PHP_INT_MAX);
 		$this->nblines=$this->csv->key();
 	}
@@ -129,7 +129,6 @@ class Sav
 	}
 	function uPiece(){
 		foreach($this->csv as $ligne){
-
 			if($ligne[0]!="" && $ligne[0]!="id"){
 			$pairebranches=$ligne[7];
 			$branchegauche=$ligne[8];
@@ -322,7 +321,7 @@ class Sav
 
      // message
      $message = "<h4>Bonjour l'équipe de l'ADV</h4>";
-     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des SAV WEB est en cours ils seront disponibles d'ici quelques minutes sur SAP !</p> ";
+     $message .= "<div style='background-color:#F1F1F1;padding:15px 10px;'><p>Je vous informe que l'importation des SAV WEB via DTW est en termine  ils sont disponibles sur SAP Business One!</p> ";
      $message .= "<p>Nombre des sav web <strong>:".$this->getNblines()."</strong></p></div>";
      $message .="<p>Bien Cordialment</p>";
      // Pour envoyer un mail HTML, l'en-tête Content-type doit être défini

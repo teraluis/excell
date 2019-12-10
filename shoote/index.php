@@ -1,11 +1,11 @@
 <?php
-require_once("Shote.php");
+require_once("Shoote.php");
 $chemin=$_GET['fichier'];
 if(isset($_GET['fichier'])){
 	$chemin=$_GET['fichier'];
 	$shote = new Shoote($chemin);
-	$shote->generer(10);
-	$shote->createfichier("genere/shotes_non_shotes_".$chemin.".csv",",");	
+	$shote->generer(100);
+	$shote->createfichier("genere/shotes_non_shotes_".$chemin,",");	
 	echo "fichier genere";
 }else {
 	echo "especifiez n fichier";

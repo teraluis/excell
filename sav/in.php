@@ -24,7 +24,7 @@ unlink($chemin);
 file_put_contents($chemin, $sav);
 file_put_contents("sav.csv", $sav);
 function forcerTelechargement($chemin) {
-	$poids = 100;
+	$poids = 20000;
 	header('Content-Type: application/octet-stream');
 	header('Content-Length: '. $poids);
 	header('Content-disposition: attachment; filename='.$chemin );
@@ -34,5 +34,5 @@ function forcerTelechargement($chemin) {
 	readfile($chemin);
 	exit();
 }	
-forcerTelechargement("sav.csv");
+forcerTelechargement($chemin);
 ?>

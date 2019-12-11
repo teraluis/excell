@@ -5,16 +5,22 @@ require_once('Sav.php');
 $month = date("m");
 $day=date("d");
 $year=date("Y");
-$chemin="in/".$year."/".$month."/sav_".$day.$month.$year.".csv";
+$chemin_ordinateur="in";
+$chemin=$chemin_ordinateur."/".$year."/".$month."/".$day."/sav_".$day.$month.$year.".csv";
 
-if(!file_exists("in")){
-mkdir("in");
+
+if(!file_exists($chemin_ordinateur)){
+mkdir("01 - In");
 }
-if(!file_exists("in/".$year)){
-mkdir("in/".$year);
+
+if(!file_exists($chemin_ordinateur."/".$year)){
+mkdir($chemin_ordinateur."/".$year);
 }
-if(!file_exists("in/".$year."/".$month)){
-mkdir("in/".$year."/".$month);
+if(!file_exists($chemin_ordinateur."/".$year."/".$month)){
+mkdir($chemin_ordinateur."/".$year."/".$month);
+}
+if(!file_exists($chemin_ordinateur."/".$year."/".$month."/".$day)){
+mkdir($chemin_ordinateur."/".$year."/".$month."/".$day);
 }
 /*if(!file_exists($chemin)){
 unlink($chemin);
@@ -34,5 +40,6 @@ function forcerTelechargement($chemin) {
 	readfile($chemin);
 	exit();
 }	
+echo "<p>dossiers generes</p>";
 //forcerTelechargement($chemin);
 ?>

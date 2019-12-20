@@ -97,12 +97,31 @@
 <a href="https://revendeurs.angeleyes-eyewear.com/wp-cron.php?export_hash=5548f8c006dc5f7a&export_id=191&action=get_data"  class="myButton">Source</a>
 </div>
 <script type="text/javascript">
-	var d = new Date();
+	var d = new Date(); console.log(d);
 	var year = d.getFullYear();
 	var month = d.getMonth();
 	var day = d.getDay();
+	var daymonth= d.getDate();
 	var titre = document.getElementById("titre");
-	titre.innerHTML="telechargement des sav du "+day+"/"+""+month+"/"+year;
+	switch(day){
+		case 1:
+		day="lundi";
+		break;
+		case 2:
+		day="mardi";
+		case 3:
+		day="mercredi";
+		break;
+		case 4:
+		day="jeudi";
+		case 5:
+		day = "vendredi";
+		break;
+		default:
+		day ="week-end";
+	}
+
+	titre.innerHTML="telechargement des sav du "+day+" "+daymonth+"/"+""+(month+1)+"/"+year;
 </script>
 </body>
 </html>

@@ -8,14 +8,23 @@
 
 
 <?php
-$fichier = 'clientsetrangers.csv';
+$fichier = 'inhollandaisvinyl.csv';
 
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
 $csv->setCsvControl(';');
 $adresse_tab =array();
-
+$csv->seek(PHP_INT_MAX);
+$nblingnes=$csv->key()-1;
 $i=0;
+function tel($str) {
+    $res = substr($str, 0, 2) .' ';
+    $res .= substr($str, 2, 2) .' ';
+    $res .= substr($str, 4, 2) .' ';
+    $res .= substr($str, 6, 2) .' ';
+    $res .= substr($str, 8, 2) .' ';
+    return $res;
+}
 function adressToCordenate($dlocation){
       $address = $dlocation; 
       
@@ -32,23 +41,34 @@ function adressToCordenate($dlocation){
 $j=0;
 
 foreach($csv as $ligne){
+	//$nblingnes=5;
+	if($j>=1 && $j<=$nblingnes){
+		$cardcode = $ligne[0];
+		$nom=$ligne[1];	
+		$rue = $ligne[2];
+		$ville = $ligne[3];
+		$postal = $ligne[4];
+		$pays = $ligne[5];
+		$telephone= $ligne[6];
+		$telephone="0".$telephone;
+		$telephone=tel($telephone);
+		$leString=trim($ville)." ".trim($postal)." ".trim($pays);
+		$cordonates = adressToCordenate($leString);
+		$la=$cordonates[0];
+		$lo=$cordonates[1];
+		$adresse_tab [] = array(
+			'cardcode'=>$cardcode,
+			"nom"	=> $nom,
+			"rue" => $rue,
+			"ville"=>$ville,
+			"postal" => $postal,			
+			"pays"=>$pays,			
+			'telephone'=>$telephone,
+			'latitude' => $la,
+			'longitude' => $lo,
+			'addressecomplette' => $leString,
 
-	if($j>=2 && $j<40	){
-	
-		if(true){
-			$cardcode = $ligne[0];
-			$nom=$ligne[1];	
-			$rue = "";//$ligne[2];
-			$postal = $ligne[3];
-			$ville = $ligne[4];
-			$telephone= $ligne[5];
-			$pays = $ligne[8];
-			$leString=trim($rue)." ".trim($postal)." ".trim($ville)." ".trim($postal)." ".trim($pays);
-			$cordonates = adressToCordenate($leString);
-			$la=$cordonates[0];
-			$lo=$cordonates[1];
-			$adresse_tab [] = array('telephone'=>$cardcode,'addresse' => $leString,'latitude' => $la,'longitude' => $lo);
-		}
+		);
 	}
 	$j++;
 }
@@ -57,21 +77,41 @@ function afficher_tableau($tab){
 	$i=0;
 	echo "<table border='1'>";
 		$head ="<tr>";
-		$head.="<td>number</td>";
-		$head.="<td>addresse</td>";
+		$head.="<td>cardcode</td>";
+		$head.="<td>nom</td>";
+		$head.="<td>rue</td>";
+		$head.="<td>ville</td>";
+		$head.="<td>postal</td>";
+		$head.="<td>pays</td>";
+		$head.="<td>telephone</td>";
 		$head.="<td>latitude</td>";
 		$head.="<td>longitude</td>";
 		$head.="</tr>";
 		echo $head;
 		foreach ($tab as $ligne) {
 			echo "<tr>";
-					echo "<td>".$i."</td>";
+					echo "<td>".$ligne['cardcode']."</td>";
+					echo "<td>";
+							echo $ligne['nom'];
+					echo "</td>";
+					echo "<td>";
+							echo $ligne['rue'];
+					echo "</td>";
+					echo "<td>";
+							echo $ligne['ville'];
+					echo "</td>";					
+					echo "<td>";
+							echo $ligne['postal'];
+					echo "</td>";
+					echo "<td>";
+							echo $ligne['pays'];
+					echo "</td>";
 					echo "<td>";
 							echo $ligne['telephone'];
-					echo "</td>";
+					echo "</td>";																								
 					echo "<td>";
 							echo $ligne['latitude'];
-					echo "</td>";
+					echo "</td>";					
 					echo "<td>";
 							echo $ligne['longitude'];
 					echo "</td>";			
@@ -105,7 +145,7 @@ function create_fichier($nom_fichier,$tab){
 	fclose($fichier_csv);
 }
 afficher_tableau($adresse_tab);
-create_fichier("etrangers_generes.csv",$adresse_tab);
+create_fichier("outhollandaisvf.csv",$adresse_tab);
 ?>
 </body>
 </html>

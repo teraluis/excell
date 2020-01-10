@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>gps</title>
 	<meta charset="utf-8">
 </head>
 <body>
 
-
 <?php
-$fichier = 'inhollandaisvinyl.csv';
+$fichier = 'newrev.csv';
 
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
@@ -38,35 +37,62 @@ function adressToCordenate($dlocation){
       $longitude = $output->results[0]->geometry->location->lng;  
       return array($latitude,$longitude);
 }
+function formaterStrings($chaine){
+	$good="";
+	if ( !empty( $chaine ) ) {
+	$tab= array("é","è");
+	$good = str_replace($tab,'e',$chaine);
+	}
+	return $good;
+}
 $j=0;
 
 foreach($csv as $ligne){
-	//$nblingnes=5;
-	if($j>=1 && $j<=$nblingnes){
+	//$nblingnes=1;
+	if($j>=0 && $j<=$nblingnes){
 		$cardcode = $ligne[0];
 		$nom=$ligne[1];	
 		$rue = $ligne[2];
 		$ville = $ligne[3];
 		$postal = $ligne[4];
 		$pays = $ligne[5];
+		$paysname="";
+		switch ($pays) {
+			case 'FR':
+				$paysname="FRANCE";
+				break;
+			case 'ES':
+				$paysname="ESPAGNE";
+				break;	
+			case 'PT':
+				$paysname="PORTUGAL";
+				break;						
+			default:
+				$paysname="FRANCE";
+				break;
+		}
 		$telephone= $ligne[6];
-		$telephone="0".$telephone;
-		$telephone=tel($telephone);
-		$leString=trim($ville)." ".trim($postal)." ".trim($pays);
-		$cordonates = adressToCordenate($leString);
-		$la=$cordonates[0];
-		$lo=$cordonates[1];
+		//$telephone="0".$telephone;
+		if(strlen($telephone)==10){
+			$telephone=tel($telephone);
+		}
+		
+		$leString=trim($ville)." ".trim($postal)." ".trim($paysname);
+		$cordonates = 0; //adressToCordenate($leString);
+		$la=$ligne[7];//$cordonates[0];
+		$lo=$ligne[8];//$cordonates[1];
+		$url="https://www.vinylfactory.fr/revendeurs/localisation-revendeurs/?latitude_user=".$la."&longitude_user=".$lo;
 		$adresse_tab [] = array(
 			'cardcode'=>$cardcode,
 			"nom"	=> $nom,
-			"rue" => $rue,
-			"ville"=>$ville,
+			"rue" => formaterStrings($rue),
+			"ville"=>formaterStrings($ville),
 			"postal" => $postal,			
 			"pays"=>$pays,			
 			'telephone'=>$telephone,
 			'latitude' => $la,
 			'longitude' => $lo,
-			'addressecomplette' => $leString,
+			'url' => $url,
 
 		);
 	}
@@ -95,10 +121,10 @@ function afficher_tableau($tab){
 							echo $ligne['nom'];
 					echo "</td>";
 					echo "<td>";
-							echo $ligne['rue'];
+							echo formaterStrings($ligne['rue']);
 					echo "</td>";
 					echo "<td>";
-							echo $ligne['ville'];
+							echo formaterStrings($ligne['ville']);
 					echo "</td>";					
 					echo "<td>";
 							echo $ligne['postal'];
@@ -133,7 +159,11 @@ function create_fichier($nom_fichier,$tab){
 	// vous devez impérativement utiliser la ligne ci-dessous pour corriger
 	// les problèmes d'affichage des caractères internationaux (les accents par exemple)
 	fprintf($fichier_csv, chr(0xEF).chr(0xBB).chr(0xBF));
-
+	$tete = array(
+		"cardcode","nom","rue","ville","postal","pays","telephone","latitude",
+		"longitude","url"
+	);
+	//fputcsv($fichier_csv, $tete, $delimiteur);
 	// Boucle foreach sur chaque ligne du tableau
 	foreach($tab as $ligne){
 		// chaque ligne en cours de lecture est insérée dans le fichier
@@ -145,7 +175,7 @@ function create_fichier($nom_fichier,$tab){
 	fclose($fichier_csv);
 }
 afficher_tableau($adresse_tab);
-create_fichier("outhollandaisvf.csv",$adresse_tab);
+create_fichier("outvinyl.csv",$adresse_tab);
 ?>
 </body>
 </html>

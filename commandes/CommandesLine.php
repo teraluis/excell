@@ -53,7 +53,27 @@ class CommandesLine extends Fichier {
 					$tmpquantity=explode('|', $quantity);
 					$pkey++;
 					for ($i=0; $i <count($tmpitemcode) ; $i++) { 
-						$this->itemcode[]=$tmpitemcode[$i];
+						if(strcasecmp($tmpitemcode[$i], "FALOUSTREETC1")==0){
+							$this->itemcode[]=strtolower("FALOU STREETC1");
+						}
+						else if(strcasecmp($tmpitemcode[$i], "FALOUSTREETC2")==0){
+							$this->itemcode[]=strtolower("FALOU STREETC2");
+						}
+						else if(strcasecmp($tmpitemcode[$i], "FALOUSTREETC3")==0){
+							$this->itemcode[]=strtolower("FALOU STREETC3");
+						}
+						else if(strcasecmp($tmpitemcode[$i], strtoupper("loustreetc1"))==0 ){
+							$this->itemcode[]=strtolower("LOU STREETC1");
+						}
+						else if(strcasecmp($tmpitemcode[$i], "LOUSTREETC2")==0 ){
+							$this->itemcode[]=strtolower("LOU STREETC2");
+						}
+						else if(strcasecmp($tmpitemcode[$i], "LOUSTREETC3")==0 ){
+							$this->itemcode[]=strtolower("LOU STREETC3");
+						}else {
+							$this->itemcode[]=$tmpitemcode[$i];
+						}																		
+						
 						$this->quantity[]=$tmpquantity[$i];
 						$this->customercode[]=$customercode;
 						$this->linenum[]=$i;

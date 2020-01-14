@@ -313,6 +313,9 @@ class Sav
 	function getDate(){
 		 return date("dmY");
 	}
+	function getLinesTab(){
+		return $this->linesTab;
+	}
 	function envoiMail($mail){
 	$to  = $mail; // notez la virgule
 

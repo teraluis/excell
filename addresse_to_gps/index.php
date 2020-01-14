@@ -7,7 +7,7 @@
 <body>
 
 <?php
-$fichier = 'newrev.csv';
+$fichier = 'newsrev.csv';
 
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
@@ -22,6 +22,14 @@ function tel($str) {
     $res .= substr($str, 4, 2) .' ';
     $res .= substr($str, 6, 2) .' ';
     $res .= substr($str, 8, 2) .' ';
+    return $res;
+}
+function tel2($str) {
+    $res = substr($str, 0, 4) .' ';//0037 79 77 75 090
+    $res .= substr($str, 4, 2) .' ';
+    $res .= substr($str, 6, 2) .' ';
+    $res .= substr($str, 8, 2) .' ';
+    $res .= substr($str, 10, 3) .' ';
     return $res;
 }
 function adressToCordenate($dlocation){
@@ -42,19 +50,23 @@ function formaterStrings($chaine){
 	if ( !empty( $chaine ) ) {
 	$tab= array("é","è");
 	$good = str_replace($tab,'e',$chaine);
+	$good = str_replace(",",' ',$good);
+	$good = str_replace("ê",'e',$good);
+	$good = str_replace("ê",'e',$good);
+	$good = str_replace("'",' ',$good);
 	}
 	return $good;
 }
 $j=0;
 
 foreach($csv as $ligne){
-	//$nblingnes=1;
-	if($j>=0 && $j<=$nblingnes){
+	//$nblingnes=50;
+	if($j>=1 && $j<=$nblingnes){
 		$cardcode = $ligne[0];
 		$nom=$ligne[1];	
 		$rue = $ligne[2];
-		$ville = $ligne[3];
-		$postal = $ligne[4];
+		$postal = $ligne[3];
+		$ville = $ligne[4];		
 		$pays = $ligne[5];
 		$paysname="";
 		switch ($pays) {
@@ -72,13 +84,15 @@ foreach($csv as $ligne){
 				break;
 		}
 		$telephone= $ligne[6];
-		//$telephone="0".$telephone;
+		$telephone="0".$telephone;
 		if(strlen($telephone)==10){
 			$telephone=tel($telephone);
+		}else {
+			$telephone=tel2($telephone);
 		}
 		
 		$leString=trim($ville)." ".trim($postal)." ".trim($paysname);
-		$cordonates = 0; //adressToCordenate($leString);
+		//$cordonates = adressToCordenate($leString);
 		$la=$ligne[7];//$cordonates[0];
 		$lo=$ligne[8];//$cordonates[1];
 		$url="https://www.vinylfactory.fr/revendeurs/localisation-revendeurs/?latitude_user=".$la."&longitude_user=".$lo;

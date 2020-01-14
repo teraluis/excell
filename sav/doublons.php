@@ -1,40 +1,19 @@
 <?php
 
-require_once('Sav.php');
-$filename ="sav.csv";
-$sav = new Sav($filename);
-$sav->generate();
-
-$tabgenere= $sav->getLinestab();
-$tabsansdoublons= array();
-$vartmp=null;
-foreach ($tabgenere as $key => $value) {
-	$vartmp = $tabgenere[$key]['description'].",".$tabgenere[$key]['customercode'].",".$tabgenere[$key]['itemcode'].",".$tabgenere[$key]['subject'].",".$tabgenere[$key]['upiece'];
-	array_push($tabsansdoublons, $vartmp);
+function unique_multidim_array($array, $key) {
+    $temp_array = array();
+    $i = 0;
+    $key_array = array();
+   
+    foreach($array as $val) {
+        if (!in_array($val[$key], $key_array)) {
+            $key_array[$i] = $val[$key];
+            $temp_array[$i] = $val;
+        }
+        $i++;
+    }
+    return $temp_array;
 }
-$tabsansdoublons = array_unique($tabsansdoublons);
-//var_dump($tabsansdoublons);
-function generertableau($tab){
-	$csv=array();
-	for($i=0;$i<count($tab);$i++){
-		$infos=explode(",", $tab[$i]);
-		$csv [] = array(
-			"callid" => $i,
-			"origin" => "-1",
-			"calltype" => "1",
-			"description" => $infos[0],
-			"customercode" => $infos[1],
-			"itemcode" => $infos[2],
-			"subject" => $infos[3],
-			"upiece" => $infos[4],
-			"problemtype" => 3
-		);
-	}
-	return $csv;
-}
-$tabsansdoublons = generertableau($tabsansdoublons);
-createFichier("cleandoublons",$tabsansdoublons);
-var_dump($tabsansdoublons);
 	function createFichier($nom_fichier,$tab){
 		// Paramétrage de l'écriture du futur fichier CSV
 		$chemin = $nom_fichier."_".date("dmY").".csv";
@@ -80,7 +59,62 @@ var_dump($tabsansdoublons);
 		}
 		// fermeture du fichier csv
 		fclose($fichier_csv);
-		$taillefichier=filesize($chemin);		
+		$taillefichier=filesize($chemin);
+		return $taillefichier;		
 	}
-//$sav->forcerTelechargement();
+function generertableau($tab){
+	$csv=array();
+	$i=0;
+	foreach($tab as $value){
+		$infos=explode(",", $value["infos"]);
+		$csv [] = array(
+			"callid" => $i,
+			"origin" => "-1",
+			"calltype" => "1",
+			"description" => $value["description"],
+			"customercode" => $infos[0],
+			"itemcode" => $infos[1],
+			"subject" => $infos[2],
+			"upiece" => $infos[3],
+			"problemtype" => 3
+		);		
+	$i++;	
+	}
+	return $csv;
+}
+	  function forcerTelechargement($poids,$nom_fichier)
+	  {
+	    header('Content-Type: application/octet-stream');
+	    header('Content-Length: '. $poids);
+	    header('Content-disposition: attachment; filename='.$nom_fichier );
+	    header('Pragma: no-cache');
+	    header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+	    header('Expires: 0');
+	    readfile($nom_fichier);
+	    exit();
+	  }	
+require_once('Sav.php');
+$filename ="sav.csv";
+$sav = new Sav($filename);
+$sav->generate();
+$description=array();
+$tabgenere= $sav->getLinestab();
+$tabsansdoublons= array();
+$vartmp=null;
+foreach ($tabgenere as $key => $value) {
+	$description[$key]=$tabgenere[$key]['description'];
+	$vartmp = $tabgenere[$key]['customercode'].",".$tabgenere[$key]['itemcode'].",".$tabgenere[$key]['subject'].",".$tabgenere[$key]['upiece'];
+	$tabsansdoublons [] = array(
+		"description" => $tabgenere[$key]['description'],
+		"infos" => $vartmp
+	);
+}
+$tabsansdoublons = unique_multidim_array($tabsansdoublons,"infos");
+$tabsansdoublonsgenre =generertableau($tabsansdoublons);
+$nom_fichier="clean_doublons";
+$poids = createFichier($nom_fichier,$tabsansdoublonsgenre);
+
+$chemin = $nom_fichier."_".date("dmY").".csv";
+forcerTelechargement($poids,$chemin);
+
 ?>

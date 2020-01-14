@@ -70,7 +70,12 @@ class CommandesLine extends Fichier {
 						}
 						else if(strcasecmp($tmpitemcode[$i], "LOUSTREETC3")==0 ){
 							$this->itemcode[]=strtolower("LOU STREETC3");
-						}else {
+						}else if(strcasecmp($tmpitemcode[$i], "vshucknallc1")==0){
+							$this->itemcode[]=strtolower("VOHUCKNALLC1+CLIP");
+						}else if(strcasecmp($tmpitemcode[$i], "vshucknallc3")==0){
+							$this->itemcode[]=strtolower("VOHUCKNALLC3+CLIP");
+						}
+						else {
 							$this->itemcode[]=$tmpitemcode[$i];
 						}																		
 						

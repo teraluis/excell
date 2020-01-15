@@ -5,21 +5,36 @@
 $month = date("m");
 $day=date("d");
 $year=date("Y");
-$chemin="in/".$year."/".$month."/commandes_".$day.$month.$year.".csv";
 
+$chemin="C:/Users/luis.manresa/Documents".$year."/".$month."/".$day."";
+echo getcwd() . "<br>"; 
+chdir("C:/Users/luis.manresa/Documents");
+echo getcwd() . "<br>"; 
 if(!file_exists("in")){
-mkdir("in");
+	
+	if(!mkdir("in",0700)){
+		echo "<p>echec lors de la creation du repertoire</p>";
+	}
 }
 if(!file_exists("in/".$year)){
-mkdir("in/".$year);
+	if(!mkdir("in/".$year)){
+		echo "<p>echec lors de la creation du repertoire year</p>";
+	}	
 }
 if(!file_exists("in/".$year."/".$month)){
-mkdir("in/".$year."/".$month);
+	if(mkdir("in/".$year."/".$month)){
+		echo "<p>echec lors de la creation du repertoire mois</p>";
+	}	
+}
+if(!file_exists("in/".$year."/".$month."/".$day)){
+	if(mkdir("in/".$year."/".$month."/".$day)){
+		echo "<p>echec lors de la creation du repertoire jour</p>";
+	}	
 }
 /*if(!file_exists($chemin)){
 unlink($chemin);
 }*/
-
+die();
 
 file_put_contents($chemin, $sav);
 file_put_contents("commandes.csv", $sav);

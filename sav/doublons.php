@@ -64,7 +64,7 @@ function unique_multidim_array($array, $key) {
 	}
 function generertableau($tab){
 	$csv=array();
-	$i=0;
+	$i=1;
 	foreach($tab as $value){
 		$infos=explode(",", $value["infos"]);
 		$csv [] = array(

@@ -67,6 +67,7 @@ function generertableau($tab){
 	$i=1;
 	foreach($tab as $value){
 		$infos=explode(",", $value["infos"]);
+		if (preg_match("/[A-Z+]{1,4}\d{1,20}/i", $infos[0])) {
 		$csv [] = array(
 			"callid" => $i,
 			"origin" => "-1",
@@ -78,7 +79,8 @@ function generertableau($tab){
 			"upiece" => $infos[3],
 			"problemtype" => 3
 		);		
-	$i++;	
+		$i++;
+		}	
 	}
 	return $csv;
 }

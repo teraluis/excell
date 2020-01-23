@@ -1,0 +1,7 @@
+<?php
+if (preg_match("/\bweb\b/i", "PHP est le meilleur langage de script du web.")) {
+    echo "Le mot a été trouvé.";
+} else {
+    echo "Le mot n'a pas été trouvé.";
+}
+?>

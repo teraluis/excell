@@ -183,7 +183,9 @@ class Sav
 				}else {
 					$this->itemcode[] = $ligne[5];
 				}
-				$subjtmp=trim($ligne[6]." ".$this->commentairesenplus($ligne));
+				$remplacer=array("bonjour","cordialment","impo- ssible de vous joindre par tel","toujours","impossible","bien cordialment","tres",",");
+				$remarque_clean = str_ireplace($remplacer, "", $ligne[6]);
+				$subjtmp=trim($remarque_clean." ".$this->commentairesenplus($ligne));
 				$this->subject[]=(empty($subjtmp))?"Ref":$subjtmp;				
 			}
 		}

@@ -150,13 +150,13 @@ class Sav
 			$clip=$ligne[24];
 			if( $branchegauche!="" || $manchongauche!="" || $tenongauche!="" ){
 				$branchegauche="1";
-				$manchongauche="1";
-				$tenongauche="1";
+				$manchongauche=&$branchegauche;
+				$tenongauche=&$branchegauche;
 			}
 			if( $branchedroite!="" || $manchondroit!="" || $tenondroit!="" ){
 				$branchedroit="1";
-				$manchondroit="1";
-				$tenondroit="1";
+				$manchondroit=&$branchedroit;
+				$tenondroit=&$branchedroit;
 			}			
 				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){

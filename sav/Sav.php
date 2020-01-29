@@ -148,6 +148,16 @@ class Sav
 			$tenongauche=$ligne[22];
 			$tenondroit=$ligne[23];
 			$clip=$ligne[24];
+			if( $branchegauche!="" || $manchongauche!="" || $tenongauche!="" ){
+				$branchegauche="1";
+				$manchongauche="1";
+				$tenongauche="1";
+			}
+			if( $branchedroite!="" || $manchondroit!="" || $tenondroit!="" ){
+				$branchedroit="1";
+				$manchondroit="1";
+				$tenondroit="1";
+			}			
 				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){
 						$this->upiece[]='Monture';

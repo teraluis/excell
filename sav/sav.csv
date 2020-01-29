@@ -1,7 +1,7 @@
 id;Title;Date;CustomerCode;Type;ItemCode;Remarques;Paire de branche;Branche gauche;Branche droite;Verres présentation;Verres solaires;Face;Tenon;Vis plaquettes;Vis face;Vis branches;Manchon;Plaquettes;Vis;Manchon gauche;Manchon droit;Tenon gauche;Tenon droit;Clip
 209731;Utilisateur : 3316 - Référence monture : fospielbergc3;20210122;ANGELEYES;Pièces détachées;fospielbergc3;;;;;;;1;;;;;;;;;;;;
-209631;Utilisateur : 3316 - Référence monture : fospielbergc3;20200122;C0561275708;Pièces détachées;fospielbergc3;;;;;;;1;;;;;;;;;;;;
-209632;Utilisateur : 1458 - Référence monture : vodewildec1;20200122;C0326261520;Pièces détachées;vodewildec1;fourny;;;1;;;;;;;;;;;;;;;
+209631;Utilisateur : 3316 - Référence monture : fospielbergc3;20200122;C0561275708;Pièces détachées;fospielbergc3;;;1;1;;;;;;;;;;;;;1;1;
+209632;Utilisateur : 1458 - Référence monture : vodewildec1;20200122;C0326261520;Pièces détachées;vodewildec1;fourny;;;;;;;;;;;;;;;;;;
 209633;Utilisateur : 1458 - Référence monture : locontinentalc1;20200122;C0326261520;Pièces détachées;locontinentalc1;leblanc;;1;;;;1;;;;;;;;;;;;
 209634;Utilisateur : 225 - Référence monture : vodohertyc1;20200122;C0143253420;Pièces détachées;vodohertyc1;;;1;1;;;;;;;;;;;;;;;
 209636;Utilisateur : 3708 - Référence monture : vomayallc1;20200122;C0781815830;Pièces détachées;vomayallc1;;;;;;;1;;;;;;;;;;;;

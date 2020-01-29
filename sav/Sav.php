@@ -148,7 +148,7 @@ class Sav
 			$tenongauche=$ligne[22];
 			$tenondroit=$ligne[23];
 			$clip=$ligne[24];
-				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) XOR ($manchondroit!="" && $manchongauche!="" ) XOR ($tenongauche!="" && $tenondroit!="" ) ) {
+				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){
 						$this->upiece[]='Monture';
 					}else {
@@ -170,8 +170,8 @@ class Sav
 					$this->upiece[]='PLAQUETTES';
 				}else if ($clip!="" && $face=='' && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='' ) {
 					$this->upiece[]='CLIP';			
-				}else if ( ($face!='' &&  ($branchegauche!='' || $branchedroite!='' ) ) XOR ($face!='' && ($manchondroit!='' || $manchongauche!='')) 
-					XOR ($face!='' && ($tenondroit!='' || $tenongauche!=''))
+				}else if ( ( $face!='' &&  ($branchegauche!='' || $branchedroite!='' ) ) XOR ( $face!='' && ( $manchondroit!='' || $manchongauche!='') ) 
+					XOR ( $face!='' && ($tenondroit!='' || $tenongauche!='') )
 			  ) {
 					$this->upiece[]='Monture';		
 				}else {

@@ -150,15 +150,11 @@ class Sav
 			$clip=$ligne[24];
 			if( $branchegauche!="" || $manchongauche!="" || $tenongauche!="" ){
 				$branchegauche="1";
-				$manchongauche=&$branchegauche;
-				$tenongauche=&$branchegauche;
 			}
 			if( $branchedroite!="" || $manchondroit!="" || $tenondroit!="" ){
 				$branchedroite="1";
-				$manchondroit=&$branchedroite;
-				$tenondroit=&$branchedroite;
 			}			
-				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
+				if( $pairebranches!='' || ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){
 						$this->upiece[]='Monture';
 					}else {
@@ -185,7 +181,7 @@ class Sav
 			  ) {
 					$this->upiece[]='Monture';		
 				}else {
-					$this->upiece[]='Monture'; 										
+					$this->upiece[]='INCONU'; 										
 				}
 				if (!empty($clip)) {
 					$first=substr($ligne[5], 0,1);

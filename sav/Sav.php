@@ -154,9 +154,9 @@ class Sav
 				$tenongauche=&$branchegauche;
 			}
 			if( $branchedroite!="" || $manchondroit!="" || $tenondroit!="" ){
-				$branchedroit="1";
-				$manchondroit=&$branchedroit;
-				$tenondroit=&$branchedroit;
+				$branchedroite="1";
+				$manchondroit=&$branchedroite;
+				$tenondroit=&$branchedroite;
 			}			
 				if( $pairebranches!='' XOR ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){
@@ -169,9 +169,9 @@ class Sav
 				}else if ( ($branchedroite!="" || $tenondroit!='' || $manchondroit!='') && $face=='' && $branchegauche=='' && $tenongauche=='' && $manchongauche=='') {
 					$this->upiece[]='BD';		
 				}else if ($verrespresentation!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
-					$this->upiece[]='VERRESPOLA';					
+					$this->upiece[]='VERREPES';					
 				}else if ($verressolaires!="" && $face=="" && $branchedroite=="" && $branchegauche=="") {
-					$this->upiece[]='VERRESPOLA';			
+					$this->upiece[]='FACE';			
 				}else if ($face!="" && $branchedroite=="" && $branchegauche=="" && $tenongauche=="" && $tenondroit=="" && $manchongauche=="" && $manchondroit=="") {
 					$this->upiece[]='FACE';					
 				}else if ( $visplaquettes!='' || $visface!='' || $visbranche!='' ||  $vis!="" && $face=="" && $branchedroite=='' && $branchegauche=='' && $manchondroit=='' && $manchongauche=='' && $tenongauche=='' && $tenondroit=='') {
@@ -193,7 +193,7 @@ class Sav
 				}else {
 					$this->itemcode[] = $ligne[5];
 				}
-				$remplacer=array("bonjour","cordialment","impo- ssible de vous joindre par tel","toujours","impossible","bien cordialment","tres",",");
+				$remplacer=array("bonjour","cordialment","impo- ssible de vous joindre par tel","toujours","impossible","bien cordialment","tres",",","!","?");
 				$remarque_clean = str_ireplace($remplacer, "", $ligne[6]);
 				$subjtmp=trim($remarque_clean." ".$this->commentairesenplus($ligne));
 				$this->subject[]=(empty($subjtmp))?"Ref":$subjtmp;				

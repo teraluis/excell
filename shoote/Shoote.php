@@ -5,7 +5,6 @@ class Shoote {
 	public $csv;
 	public $montures=array();
 	public function __construct($fichier){
-
 		$this->csv = new SplFileObject($fichier);
 		$this->csv->setFlags(SplFileObject::READ_CSV);
 		$this->csv->setCsvControl(';');

@@ -19,7 +19,7 @@ class Sav
 	protected $today ;
 	protected $nomfichier;
 	protected $taillefichier;  
-	function __construct($filename)
+	function __construct($filename="sav.csv")
 	{
 		$fichier = $filename;
 		$this->csv = new SplFileObject($fichier);

@@ -8,14 +8,15 @@
 
 <?php
 
-$fichier = 'VF-OINV - exprort ajout Revendeurs V3.csv';
+$fichier = 'MZ- OINV - export ajout Revendeurs.csv';
 
 $csv = new SplFileObject($fichier);
 $csv->setFlags(SplFileObject::READ_CSV);
 $csv->setCsvControl(';');
 $adresse_tab =array();
 $csv->seek(PHP_INT_MAX);
-$nblingnes=$csv->key()-1;
+$nblingnes=$csv->key();
+
 $i=0;
 function tel($str) {
     $res = substr($str, 0, 2) .' ';
@@ -38,7 +39,6 @@ function adressToCordenate($dlocation){
       $prepAddr = str_replace(' ','+',$address);
       $prepAddr = str_replace(array(",","[","]","(",")"),'',$prepAddr);
       $geocode=file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?address='.$prepAddr.'+View,+CA&key=AIzaSyCw7IF5dgrLYfevSM2pHzENz0ungw0dt88');
-      //echo $geocode;
       $output= json_decode($geocode);
 	  $latitude = $output->results[0]->geometry->location->lat;
       $longitude = $output->results[0]->geometry->location->lng;  
@@ -54,22 +54,27 @@ function formaterStrings($chaine){
 	$good = str_replace("ê",'e',$good);
 	$good = str_replace("ê",'e',$good);
 	$good = str_replace("'",' ',$good);
+	$good = str_replace("?",' ',$good);
+	$good = str_replace("!",' ',$good);
+	$good = str_replace("�", "", $good);
+	$good = str_replace("°", "", $good);
+	$good = str_replace("U+FFFD", "", $good);
 	}
 	return trim($good);
 }
 
-function genrate($csv){
+function genrate($csv,$nblingnes){
 $j=0;
 foreach($csv as $ligne){
-	$nblingnes=2077;
+	//$nblingnes=20;
 	if($j>=1 && $j<=$nblingnes){		
-		$nom=trim($ligne[1]);	
-		$rue = trim($ligne[2]);
-		$postal = trim($ligne[3]);
-		$ville = trim($ligne[4]);		
-		$pays = trim($ligne[6]);
+		$nom=formaterStrings($ligne[1]);	
+		$rue = formaterStrings($ligne[2]);
+		$postal = formaterStrings($ligne[3]);
+		$ville = formaterStrings($ligne[4]);		
+		$pays = formaterStrings($ligne[6]);
 		$paysname="";
-		$cardcode0=trim($ligne[0]);
+		$cardcode0=formaterStrings($ligne[0]);
 		switch ($pays) {
 			case 'FR':
 				$paysname="FRANCE";
@@ -83,10 +88,38 @@ foreach($csv as $ligne){
 				$paysname="PORTUGAL";
 				$cardcode = "PT".$ligne[5];
 				break;
-			case 'BL':
+			case 'BE':
 				$paysname="BELGIQUE";
-				$cardcode = "BL".$ligne[5];
-				break;										
+				$cardcode = "BE".$ligne[5];
+				break;
+			case 'SN':
+				$paysname="SENEGAL";
+				$cardcode = "SN".$ligne[5];
+				break;		
+			case 'MQ':
+				$paysname="MARTINIQUE";
+				$cardcode = "MQ".$ligne[5];
+				break;
+			case 'CA':
+				$paysname="CANADA";
+				$cardcode = "CA".$ligne[5];
+				break;
+			case 'MA':
+				$paysname="MAROCCO";
+				$cardcode = "MA".$ligne[5];
+				break;
+			case 'GP':
+				$paysname="GUADLOUPPE";
+				$cardcode = "GP".$ligne[5];
+				break;			
+			case 'GF':
+				$paysname="GUYANE";
+				$cardcode = "GF".$ligne[5];
+				break;
+			case 'GB':
+				$paysname="GABON";
+				$cardcode = "GB".$ligne[5];
+				break;																																			
 			default:
 				$paysname="FRANCE";
 				$cardcode = "C0".$ligne[5];
@@ -94,26 +127,32 @@ foreach($csv as $ligne){
 		}
 		$telephone= $ligne[5];
 		//$telephone="0".$telephone;
-		$telephone=trim($telephone);
+		$telephone=formaterStrings($telephone);
 		if(strlen($telephone)==9){
 			$telephone=tel($telephone);
 			$telephone="0032 ".$telephone;
 		}else if($telephone==""){
-			$telephone=substr($cardcode0,2);
+			$telephone="0".substr($cardcode0,2);
 		}
 		else {
 			$telephone=tel2($telephone);
 		}		
-		$leString=$rue." ".trim($ville)." ".trim($postal)." ".trim($paysname);
+		$leString=$rue." ".formaterStrings($ville)." ".formaterStrings($postal)." ".formaterStrings($paysname);
 		if($ligne[7]=="" || $ligne[8]==""){
 			$cordonates = adressToCordenate($leString);
 			$la=$cordonates[0];
 			$lo=$cordonates[1];
 			if(preg_match("/^[-0-9]{1,2}[.][0-9]{3,200}/i", $lo)==0 || preg_match("/^[-0-9]{1,2}[.][0-9]{3,200}/i", $la)==0 ){
-				$leString = trim($postal)." ".trim($paysname);
+				$leString = formaterStrings($postal)." ".formaterStrings($paysname);
 				$cordonates = adressToCordenate($leString);
 				$la=$cordonates[0];
 				$lo=$cordonates[1];
+				if(preg_match("/^[-0-9]{1,2}[.][0-9]{3,200}/i", $lo)==0 || preg_match("/^[-0-9]{1,2}[.][0-9]{3,200}/i", $la)==0){
+					$leString = formaterStrings($paysname);
+					$cordonates = adressToCordenate($leString);
+					$la=$cordonates[0];
+					$lo=$cordonates[1];					
+				}
 			}			
 		}else {
 			$la=$ligne[7];
@@ -133,7 +172,6 @@ foreach($csv as $ligne){
 			'latitude' => $la,
 			'longitude' => $lo,
 			'url' => $url,
-
 		);
 	}
 	$j++;
@@ -217,9 +255,9 @@ function create_fichier($nom_fichier,$tab){
 	// fermeture du fichier csv
 	fclose($fichier_csv);
 }
-$adresse_tab = genrate($csv);
+$adresse_tab = genrate($csv,$nblingnes);
 afficher_tableau($adresse_tab);
-create_fichier("revendeurs_freakshow.csv",$adresse_tab);
+create_fichier("resultat.csv",$adresse_tab);
 ?>
 </body>
 </html>

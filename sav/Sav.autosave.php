@@ -19,7 +19,7 @@ class Sav
 	protected $today ;
 	protected $nomfichier;
 	protected $taillefichier;  
-	function __construct($filename)
+	function __construct($filename="")
 	{
 		$fichier = $filename;
 		$this->csv = new SplFileObject($fichier);
@@ -150,13 +150,9 @@ class Sav
 			$clip=$ligne[24];
 			if( $branchegauche!="" || $manchongauche!="" || $tenongauche!="" ){
 				$branchegauche="1";
-				$manchongauche="1";
-				$tenongauche="1";
 			}
 			if( $branchedroite!="" || $manchondroit!="" || $tenondroit!="" ){
 				$branchedroite="1";
-				$manchondroit=&$branchedroite;
-				$tenondroit=&$branchedroite;
 			}			
 				if( $pairebranches!='' || ($branchegauche!="" && $branchedroite!="" ) || ($manchondroit!="" && $manchongauche!="" ) || ($tenongauche!="" && $tenondroit!="" ) ) {
 					if(strlen($face)!=0){
